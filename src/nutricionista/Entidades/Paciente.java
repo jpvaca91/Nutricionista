@@ -9,23 +9,26 @@ public class Paciente {
     private String domicilio;
     private String telefono;
     private int idPaciente;
+    private boolean estado;
 
     public Paciente() {
     }
 
-    public Paciente(String nombre, int dni, String domicilio, String telefono, int idPaciente) {
+    public Paciente(String nombre, int dni, String domicilio, String telefono, int idPaciente, boolean estado) {
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.idPaciente = idPaciente;
+        this.estado = estado;
     }
 
-    public Paciente(String nombre, int dni, String domicilio, String telefono) {
+    public Paciente(String nombre, int dni, String domicilio, String telefono, boolean estado) {
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.estado = estado;
     }
 
     public String getNombre() {
@@ -66,6 +69,14 @@ public class Paciente {
 
     public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
     
