@@ -9,12 +9,12 @@ package nutricionista.Vistas;
  *
  * @author vico_
  */
-public class MenuPaciente extends javax.swing.JInternalFrame {
+public class FormularioSeguimientoPorPaciente extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form MenuPaciente
+     * Creates new form FormularioSeguimientoPorPaciente
      */
-    public MenuPaciente() {
+    public FormularioSeguimientoPorPaciente() {
         initComponents();
     }
 
