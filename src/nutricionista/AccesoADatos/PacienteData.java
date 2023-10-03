@@ -49,5 +49,50 @@ public class PacienteData {
         }
 
     }
+    public void actualizarPaciente(Paciente paciente) {
+        String sql = "UPDATE paciente SET nombre=?, dni=?, domicilio=?, telefono=?, estado=?"
+                + "WHERE DNI=?";
 
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, paciente.getNombre());
+            ps.setInt(2, paciente.getDni());
+            ps.setString(3, paciente.getDomicilio());
+            ps.setString(4, paciente.getTelefono());
+            ps.setBoolean(5, paciente.isEstado());
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Paciente actualizado");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el paciente");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+
+        }
+    }
+    public void eliminarPaciente(int dni) {
+        String sql = "UPDATE paciente SET estado=0 WHERE dni =?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Paciente eliminado");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Paciente no encontrado");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+        }
+
+    }
 }
