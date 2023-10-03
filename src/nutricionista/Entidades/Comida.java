@@ -4,7 +4,7 @@ package nutricionista.Entidades;
 
 public class Comida {
     
-    private String comida;
+    private String nombre;
     private String detalle;
     private int cantCalorias;
     private int idComidas;
@@ -12,25 +12,25 @@ public class Comida {
     public Comida() {
     }
 
-    public Comida(String comida, String detalle, int cantCalorias, int idComidas) {
-        this.comida = comida;
+    public Comida(String nombre, String detalle, int cantCalorias, int idComida) {
+        this.nombre = nombre;
         this.detalle = detalle;
         this.cantCalorias = cantCalorias;
-        this.idComidas = idComidas;
+        this.idComidas = idComida;
     }
 
-    public Comida(String comida, String detalle, int cantCalorias) {
-        this.comida = comida;
+    public Comida(String nombre, String detalle, int cantCalorias) {
+        this.nombre = nombre;
         this.detalle = detalle;
         this.cantCalorias = cantCalorias;
     }
 
-    public String getComida() {
-        return comida;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setComida(String comida) {
-        this.comida = comida;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDetalle() {
@@ -53,8 +53,8 @@ public class Comida {
         return idComidas;
     }
 
-    public void setIdComidas(int idComidas) {
-        this.idComidas = idComidas;
+    public void setIdComidas(int idComida) {
+        this.idComidas = idComida;
     }
     
     
