@@ -2,22 +2,22 @@
 package nutricionista.Entidades;
 
 
-public class DietaConida {
+public class DietaComida {
     
     private int id;
     private Comida comida;
     private Dieta dieta;
 
-    public DietaConida() {
+    public DietaComida() {
     }
 
-    public DietaConida(int id, Comida comida, Dieta dieta) {
+    public DietaComida(int id, Comida comida, Dieta dieta) {
         this.id = id;
         this.comida = comida;
         this.dieta = dieta;
     }
 
-    public DietaConida(Comida comida, Dieta dieta) {
+    public DietaComida(Comida comida, Dieta dieta) {
         this.comida = comida;
         this.dieta = dieta;
     }
