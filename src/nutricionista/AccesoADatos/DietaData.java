@@ -28,9 +28,8 @@ public class DietaData {
         String sql = "INSERT INTO dieta (nombre,paciente,fechaInicial,pesoInicial,pesoFinal,fechaFinal)"
                 + "VALUE (?,?,?,?,?,?)";
 
-        PreparedStatement ps;
         try {
-            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, dieta.getNombre());
             ps.setString(2, dieta.getPaciente().getNombre());
             ps.setDate(3, Date.valueOf(dieta.getFechaInicial()));
