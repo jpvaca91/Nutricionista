@@ -77,7 +77,7 @@ public class PacienteData {
     }
     public void eliminarPaciente(int dni) {
         String sql = "UPDATE paciente SET estado=0 WHERE dni =?";
-
+//agregar verificacion de que el paciente no exista en la tabla dieta.
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
