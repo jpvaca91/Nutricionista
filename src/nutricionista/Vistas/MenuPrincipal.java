@@ -37,12 +37,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jmDieta = new javax.swing.JMenu();
+        jmComidas = new javax.swing.JMenu();
+        jmSeguimiento = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        jmSalir = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -65,24 +65,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Paciente");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Dieta");
-        jMenuBar1.add(jMenu2);
+        jmDieta.setText("Dieta");
+        jMenuBar1.add(jmDieta);
 
-        jMenu5.setText("Comidas");
-        jMenuBar1.add(jMenu5);
+        jmComidas.setText("Comidas");
+        jMenuBar1.add(jmComidas);
 
-        jMenu6.setText("Seguimiento");
+        jmSeguimiento.setText("Seguimiento");
 
         jMenuItem1.setText("Por paciente");
-        jMenu6.add(jMenuItem1);
+        jmSeguimiento.add(jMenuItem1);
 
         jMenuItem2.setText("Por dieta");
-        jMenu6.add(jMenuItem2);
+        jmSeguimiento.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(jmSeguimiento);
 
-        jMenu7.setText("Salir");
-        jMenuBar1.add(jMenu7);
+        jmSalir.setText("Salir");
+        jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -137,12 +137,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -152,5 +148,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenu jmComidas;
+    private javax.swing.JMenu jmDieta;
+    private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenu jmSeguimiento;
     // End of variables declaration//GEN-END:variables
 }
