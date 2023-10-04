@@ -36,12 +36,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmPaciente = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jmDieta = new javax.swing.JMenu();
+        jmFormularioDieta = new javax.swing.JMenuItem();
         jmComidas = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jmSeguimiento = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -64,6 +67,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem8.setText("jMenuItem8");
 
         jMenuItem3.setText("jMenuItem3");
+
+        jMenuItem10.setText("jMenuItem10");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,9 +101,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jmPaciente);
 
         jmDieta.setText("Dieta");
+        jmDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmDietaActionPerformed(evt);
+            }
+        });
+
+        jmFormularioDieta.setText("Formulario dieta");
+        jmFormularioDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormularioDietaActionPerformed(evt);
+            }
+        });
+        jmDieta.add(jmFormularioDieta);
+
         jMenuBar1.add(jmDieta);
 
         jmComidas.setText("Comidas");
+        jmComidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmComidasActionPerformed(evt);
+            }
+        });
+
+        jMenuItem11.setText("Formulario comida");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jmComidas.add(jMenuItem11);
+
         jMenuBar1.add(jmComidas);
 
         jmSeguimiento.setText("Seguimiento");
@@ -145,6 +178,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.moveToFront(fp);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jmDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmDietaActionPerformed
+
+    private void jmFormularioDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioDietaActionPerformed
+        // TODO add your handling code here:
+        
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioDieta fd = new FormularioDieta();
+        fd.setVisible(true);
+        Escritorio.add(fd);
+        Escritorio.moveToFront(fd);
+    }//GEN-LAST:event_jmFormularioDietaActionPerformed
+
+    private void jmComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComidasActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jmComidasActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioComidas fc = new FormularioComidas();
+        fc.setVisible(true);
+        Escritorio.add(fc);
+        Escritorio.moveToFront(fc);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,6 +251,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -197,6 +263,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jmComidas;
     private javax.swing.JMenu jmDieta;
+    private javax.swing.JMenuItem jmFormularioDieta;
     private javax.swing.JMenu jmPaciente;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmSeguimiento;
