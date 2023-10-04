@@ -74,4 +74,27 @@ public class ComidaData {
          
          
     }
+   /* public void eliminarComida(String nombre) {
+
+        String sql = "UPDATE comida SET  WHERE nombre=?";
+
+       // PreparedStatement ps;
+        try {
+           PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int dni = 0;
+
+            ps.setInt(1, dni);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Comida eliminada");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Comida no encontrada");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al accedeer a la tabla comida");
+        }
+    }*/
+    
 }
