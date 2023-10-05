@@ -5,8 +5,11 @@
  */
 package nutricionista.Vistas;
 
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
+import nutricionista.AccesoADatos.DietaData;
 import nutricionista.AccesoADatos.PacienteData;
+import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.Paciente;
 
 /**
@@ -275,6 +278,22 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
         PacienteData pacientedata = new PacienteData();
         pacientedata.guardarPaciente(paci);
+        int idpaciente = (pacientedata.buscarPaciente(dni)).getIdPaciente();
+
+        //acá guardamos los datos de Dieta del mismo paciente
+        try {
+            Dieta dieta = new Dieta();
+            dieta.setPaciente(paci);
+            dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
+            dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
+
+            DietaData dd = new DietaData();
+            dd.guardarDieta(dieta);
+
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(null, "Debe introducir pesos correctos");
+        }
         limpiarCampos();
 
 
@@ -363,7 +382,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private void jtPesoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesoInicialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesoInicialActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -400,7 +419,10 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtDomicilio.setText("");
         jtCelular.setText("");
-        jrbEstado.setSelected(true);
+        jrbEstado.setSelected(false);
+        jtPesoObj.setText("");
+        jtPesoInicial.setText("");
+        jdFechaInicial.setDate(null);
 
     }
 }

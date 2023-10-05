@@ -106,7 +106,7 @@ public class PacienteData {
     
     public Paciente buscarPaciente(int dni) {
         
-        String sql = "SELECT nombre, domicilio, telefono,estado FROM paciente WHERE DNI= ? ";
+        String sql = "SELECT nombre, domicilio, telefono,estado, idPaciente FROM paciente WHERE DNI= ? ";
         Paciente paciente = null;
         
         PreparedStatement ps;
@@ -123,6 +123,7 @@ public class PacienteData {
                 paciente.setDomicilio(rs.getString("domicilio"));
                 paciente.setTelefono(rs.getString("telefono"));
                 paciente.setEstado(rs.getBoolean("estado"));
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
                 
             } else {
                 JOptionPane.showMessageDialog(null, "paciente no encontrado");

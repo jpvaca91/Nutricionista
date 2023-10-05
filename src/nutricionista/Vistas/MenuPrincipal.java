@@ -81,7 +81,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
 
         jmPaciente.setText("Paciente");
