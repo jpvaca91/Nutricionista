@@ -45,10 +45,11 @@ public class PacienteData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar a la Base de Datos"+ex);
+            JOptionPane.showMessageDialog(null, "Error al conectar a la Base de Datos" + ex);
         }
 
     }
+
     public void actualizarPaciente(Paciente paciente) {
         String sql = "UPDATE paciente SET nombre=?, dni=?, domicilio=?, telefono=?, estado=?"
                 + "WHERE DNI=?";
@@ -75,6 +76,7 @@ public class PacienteData {
 
         }
     }
+
     public void eliminarPaciente(int dni) {
         String sql = "UPDATE paciente SET estado=0 WHERE dni =?";
 //agregar verificacion de que el paciente no exista en la tabla dieta.
@@ -94,5 +96,36 @@ public class PacienteData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
         }
 
+    }
+
+    public Paciente buscarPaciente(int dni) {
+
+        String sql = "SELECT nombre, domicilio, telefono FROM paciente WHERE DNI= ? AND estado=1 ";
+        Paciente paciente = null;
+
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, dni);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                paciente = new Paciente();
+                paciente.setDni(dni);
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getString("telefono"));
+                paciente.setEstado(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "paciente no encontrado");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+        }
+        return paciente;
     }
 }//obtenerPacientePorId-obtenerTodo

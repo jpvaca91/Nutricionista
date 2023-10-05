@@ -44,9 +44,10 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
         jrbEstado = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("Nombre");
 
@@ -76,12 +77,27 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jButton3.setText("Eliminar");
 
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Limpiar");
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
-        jrbEstado.setText("Estado");
+        jLabel6.setText("Estado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,15 +113,17 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
+                        .addComponent(jbLimpiar)
                         .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel4)))
                         .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -130,31 +148,36 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscar)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(jrbEstado)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbBuscar)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jrbEstado)
+                        .addGap(16, 16, 16)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jbLimpiar))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -163,38 +186,33 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-          Boolean estado = false;
-     
+        Boolean estado = false;
+
         String doc;
-    
-            doc=jtDNI.getText();
-            if( esNumerico(doc)){
-         
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingresar un numero de documento valido");
+
+        doc = jtDNI.getText();
+        if (esNumerico(doc)) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingresar un numero de documento valido");
         }
-               
-            
-                
-      
+
         int dni = Integer.parseInt(jtDNI.getText());
         String nombre = jtNombre.getText();
         String domicilio = jtDomicilio.getText();
         String celular = jtCelular.getText();
-        
+
         if (jrbEstado.isSelected()) {
             estado = true;
         }
-        
-        
+
         Paciente paci = new Paciente(dni, nombre, domicilio, celular, estado);
         JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
-        
+
         PacienteData pacientedata = new PacienteData();
         pacientedata.guardarPaciente(paci);
-        LimpiarCampos();
-        
-     
+        limpiarCampos();
+
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -202,19 +220,50 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDNIActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // Configuracion del boton "SALIR"
+
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        //Configuracion del boton "BUSCAR"
+        PacienteData pd=new PacienteData();
+        Paciente paciente=new Paciente();
+        
+        Integer dni=Integer.parseInt(jtDNI.getText());
+        paciente=pd.buscarPaciente(dni);
+        
+        if(paciente!=null){
+            jtNombre.setText(paciente.getNombre());
+            jtDomicilio.setText(paciente.getDomicilio());
+            jtCelular.setText(paciente.getTelefono());
+            jrbEstado.setSelected(true);
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
+        }
+        
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtDNI;
@@ -222,20 +271,16 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
+    public static boolean esNumerico(String cadena) {
+        return cadena.matches("\\d+");
+    }
 
-
-
-
-
-public static boolean esNumerico(String cadena){
-        return cadena.matches("\\d+");}
-
- public void LimpiarCampos() {
+    public void limpiarCampos() {
         jtDNI.setText("");
         jtNombre.setText("");
         jtDomicilio.setText("");
         jtCelular.setText("");
         jrbEstado.setSelected(true);
-       
+
     }
 }
