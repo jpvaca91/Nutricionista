@@ -79,18 +79,21 @@ public class PacienteData {
     }
     
     public void eliminarPaciente(int dni) {
-        String sql = "UPDATE paciente SET estado=0 WHERE dni =?";
-//agregar verificacion de que el paciente no exista en la tabla dieta.
+        String sql = "UPDATE paciente SET estado=0 WHERE dni =? AND dni not in (SELECT dni FROM dieta WHERE dni=?);";
+
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
+            ps.setInt(2, dni);
+            
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 
                 JOptionPane.showMessageDialog(null, "Paciente eliminado");
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Paciente no encontrado");
+                JOptionPane.showMessageDialog(null, "Paciente no encontrado o ya tiene asignada una Dieta");
             }
             
         } catch (SQLException ex) {
