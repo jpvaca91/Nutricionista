@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -131,5 +133,34 @@ public class PacienteData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
         }
         return paciente;
+    }
+    public List<Paciente> listarPacientes() {
+
+        String sql = "SELECT idPaciente, nombre, dni, domicilio, telefono FROM paciente WHERE estado=1 ";
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Paciente paciente = new Paciente();
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setDni(rs.getInt("dni"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getString("telefono"));
+                
+
+                paciente.setEstado(true);
+
+                pacientes.add(paciente);
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pacientes" + ex);
+        }
+        return pacientes;
     }
 }//obtenerPacientePorId-obtenerTodo

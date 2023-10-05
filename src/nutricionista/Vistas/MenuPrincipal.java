@@ -192,6 +192,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jmDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaActionPerformed
         // TODO add your handling code here:
         
+        
     }//GEN-LAST:event_jmDietaActionPerformed
 
     private void jmFormularioDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioDietaActionPerformed
