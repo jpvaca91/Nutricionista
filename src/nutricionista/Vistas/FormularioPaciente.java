@@ -41,9 +41,9 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtCelular = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jbGuardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jtModificar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
         jrbEstado = new javax.swing.JRadioButton();
@@ -63,6 +63,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("PACIENTE");
 
         jbGuardar.setText("Guardar");
@@ -72,14 +73,24 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Modificar");
-
-        jButton3.setText("Eliminar");
-
-        jButton4.setText("Salir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jtModificar.setText("Modificar");
+        jtModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jtModificarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -109,9 +120,9 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(jtModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(jbEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbLimpiar)
                         .addGap(0, 8, Short.MAX_VALUE))
@@ -135,19 +146,20 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                             .addComponent(jtCelular))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(jbSalir)
                     .addComponent(jbBuscar))
                 .addGap(20, 20, 20))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(202, 202, 202))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -174,11 +186,11 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                         .addGap(16, 16, 16)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(jtModificar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbSalir)
                     .addComponent(jbLimpiar))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,11 +232,11 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDNIActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // Configuracion del boton "SALIR"
 
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         limpiarCampos();
@@ -232,29 +244,68 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         //Configuracion del boton "BUSCAR"
-        PacienteData pd=new PacienteData();
-        Paciente paciente=new Paciente();
-        
-        Integer dni=Integer.parseInt(jtDNI.getText());
-        paciente=pd.buscarPaciente(dni);
-        
-        if(paciente!=null){
-            jtNombre.setText(paciente.getNombre());
-            jtDomicilio.setText(paciente.getDomicilio());
-            jtCelular.setText(paciente.getTelefono());
-            jrbEstado.setSelected(true);
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
+        PacienteData pd = new PacienteData();
+        Paciente paciente = new Paciente();
+        try {
+            Integer dni = Integer.parseInt(jtDNI.getText());
+            paciente = pd.buscarPaciente(dni);
+
+            if (paciente != null) {
+                jtNombre.setText(paciente.getNombre());
+                jtDomicilio.setText(paciente.getDomicilio());
+                jtCelular.setText(paciente.getTelefono());
+                jrbEstado.setSelected(true);
+
+            }
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(null, "debe ingresar un documento válido");
+            limpiarCampos();
         }
-        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtModificarActionPerformed
+        //Configuración del botón "MODIFICAR"
+        Paciente paciente = new Paciente();
+        paciente.setDni(Integer.parseInt(jtDNI.getText()));
+        paciente.setDomicilio(jtDomicilio.getText());
+        paciente.setEstado(jrbEstado.isSelected());
+        paciente.setNombre(jtNombre.getText());
+        paciente.setTelefono(jtCelular.getText());
+
+        PacienteData pd = new PacienteData();
+        pd.actualizarPaciente(paciente);
+
+        limpiarCampos();
+    }//GEN-LAST:event_jtModificarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // Configuracion del botón "ELIMINAR"
+
+        try {
+
+            Integer dni = Integer.parseInt(jtDNI.getText());
+
+            String botones[] = {"SI", "NO"};
+            int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR este Paciente?", "ALERTA!", 0, 0, null, botones, this);
+
+            if (eleccion == JOptionPane.YES_OPTION) {
+                PacienteData pd = new PacienteData();
+                pd.eliminarPaciente(dni);
+                limpiarCampos();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Paciente no Eliminado");
+                limpiarCampos();
+            }
+
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(null, "debe ingresar un documento válido");
+            limpiarCampos();
+
+    }//GEN-LAST:event_jbEliminarActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -262,12 +313,15 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtDNI;
     private javax.swing.JTextField jtDomicilio;
+    private javax.swing.JButton jtModificar;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
