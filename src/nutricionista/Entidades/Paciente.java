@@ -31,6 +31,15 @@ public class Paciente {
         this.estado = estado;
     }
 
+    public Paciente(int dni, String nombre, String domicilio, String telefono, Boolean estado) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.estado = estado;
+        
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -78,6 +87,8 @@ public class Paciente {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    
     
     
     
