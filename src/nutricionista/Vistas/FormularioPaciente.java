@@ -258,7 +258,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
             }
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(null, "debe ingresar un documento válido");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -299,7 +299,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             }
 
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(null, "debe ingresar un documento válido");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
 
     }//GEN-LAST:event_jbEliminarActionPerformed

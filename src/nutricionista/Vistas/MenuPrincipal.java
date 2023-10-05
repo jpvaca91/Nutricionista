@@ -138,9 +138,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmSeguimiento.setText("Seguimiento");
 
         jMenuItem1.setText("Por paciente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jmSeguimiento.add(jMenuItem1);
 
         jMenuItem2.setText("Por dieta");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jmSeguimiento.add(jMenuItem2);
 
         jMenuBar1.add(jmSeguimiento);
@@ -181,6 +191,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jmDietaActionPerformed
 
     private void jmFormularioDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioDietaActionPerformed
@@ -209,6 +220,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.add(fc);
         Escritorio.moveToFront(fc);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioSeguimientoPorPaciente fspp = new FormularioSeguimientoPorPaciente();
+        fspp.setVisible(true);
+        Escritorio.add(fspp);
+        Escritorio.moveToFront(fspp);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
