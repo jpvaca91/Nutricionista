@@ -5,7 +5,9 @@
  */
 package nutricionista.Vistas;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import nutricionista.AccesoADatos.DietaData;
 import nutricionista.AccesoADatos.PacienteData;
@@ -149,11 +151,6 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jdFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(166, 166, 166))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jbGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -173,9 +170,13 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jdFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -277,17 +278,19 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
 
         PacienteData pacientedata = new PacienteData();
-        pacientedata.guardarPaciente(paci);
-        int idpaciente = (pacientedata.buscarPaciente(dni)).getIdPaciente();
 
+        //int idpaciente = (pacientedata.buscarPaciente(dni)).getIdPaciente();
         //acá guardamos los datos de Dieta del mismo paciente
         try {
+
             Dieta dieta = new Dieta();
-            dieta.setPaciente(paci);
+
             dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
             dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
 
+            pacientedata.guardarPaciente(paci);
+            dieta.setPaciente(paci);
             DietaData dd = new DietaData();
             dd.guardarDieta(dieta);
 
@@ -317,21 +320,33 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         //Configuracion del boton "BUSCAR"
         PacienteData pd = new PacienteData();
         Paciente paciente = new Paciente();
+        Dieta dieta = new Dieta();
+        DietaData dd = new DietaData();
+
         try {
             Integer dni = Integer.parseInt(jtDNI.getText());
             paciente = pd.buscarPaciente(dni);
+            dieta = dd.buscarDieta(paciente);
 
             if (paciente != null) {
                 jtNombre.setText(paciente.getNombre());
                 jtDomicilio.setText(paciente.getDomicilio());
                 jtCelular.setText(paciente.getTelefono());
                 jrbEstado.setSelected(paciente.isEstado());
-
+                jtPesoInicial.setText(dieta.getPesoInicial() + "");
+                jtPesoObj.setText(dieta.getPesoFinal() + "");
+                LocalDate lc=dieta.getFechaInicial();
+                
+                Date date = Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                jdFechaInicial.setDate(date);
+                
             }
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
         }
+
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtModificarActionPerformed

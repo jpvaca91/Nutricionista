@@ -10,10 +10,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import nutricionista.Entidades.Dieta;
+import nutricionista.Entidades.Paciente;
 import org.mariadb.jdbc.Statement;
 
 public class DietaData {
@@ -30,12 +32,11 @@ public class DietaData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-           
+
             ps.setInt(1, dieta.getPaciente().getIdPaciente());
             ps.setDate(2, Date.valueOf(dieta.getFechaInicial()));
             ps.setDouble(3, dieta.getPesoInicial());
             ps.setDouble(4, dieta.getPesoFinal());
-            
 
             ps.executeUpdate();
 
@@ -57,7 +58,7 @@ public class DietaData {
                 + " WHERE paciente=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-           
+
             ps.setDate(1, Date.valueOf(dieta.getFechaInicial()));
             ps.setDouble(2, dieta.getPesoInicial());
             ps.setDouble(3, dieta.getPesoFinal());
@@ -79,4 +80,31 @@ public class DietaData {
 
     }
 
+    public Dieta buscarDieta(Paciente paciente) {
+
+        String sql = "Select fechaInicial, pesoInicial, pesoFinal from dieta where paciente=?";
+        Dieta dieta = null;
+
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, paciente.getIdPaciente());
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                dieta = new Dieta();
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoFinal(rs.getDouble("pesoFinal"));
+            } else {
+                JOptionPane.showMessageDialog(null, "Dieta no encontrada");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+        }
+        return dieta;
+    }
 }
