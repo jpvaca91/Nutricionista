@@ -25,17 +25,17 @@ public class DietaData {
     }
 
     public void guardarDieta(Dieta dieta) {
-        String sql = "INSERT INTO dieta (nombre,paciente,fechaInicial,pesoInicial,pesoFinal,fechaFinal)"
-                + "VALUE (?,?,?,?,?,?)";
+        String sql = "INSERT INTO dieta (paciente,fechaInicial,pesoInicial,pesoFinal)"
+                + "VALUE (?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, dieta.getNombre());
-            ps.setString(2, dieta.getPaciente().getNombre());
-            ps.setDate(3, Date.valueOf(dieta.getFechaInicial()));
-            ps.setDouble(4, dieta.getPesoInicial());
-            ps.setDouble(5, dieta.getPesoFinal());
-            ps.setDate(6, Date.valueOf(dieta.getFechaFinal()));
+           
+            ps.setInt(1, dieta.getPaciente().getIdPaciente());
+            ps.setDate(2, Date.valueOf(dieta.getFechaInicial()));
+            ps.setDouble(3, dieta.getPesoInicial());
+            ps.setDouble(4, dieta.getPesoFinal());
+            
 
             ps.executeUpdate();
 
@@ -53,16 +53,16 @@ public class DietaData {
     }
 
     public void actualizarDieta(Dieta dieta) {
-        String sql = "UPDATE dieta SET nombre=?, fechaInicial=?,pesoInicial=?,pesoFinal=?,fechaFinal=?"
+        String sql = "UPDATE dieta SET fechaInicial=?,pesoInicial=?,pesoFinal=?,fechaFinal=?"
                 + " WHERE paciente=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, dieta.getNombre());
-            ps.setDate(2, Date.valueOf(dieta.getFechaInicial()));
-            ps.setDouble(3, dieta.getPesoInicial());
-            ps.setDouble(4, dieta.getPesoFinal());
-            ps.setDate(5, Date.valueOf(dieta.getFechaFinal()));
-            ps.setString(6, dieta.getPaciente().getNombre());
+           
+            ps.setDate(1, Date.valueOf(dieta.getFechaInicial()));
+            ps.setDouble(2, dieta.getPesoInicial());
+            ps.setDouble(3, dieta.getPesoFinal());
+            ps.setDate(4, Date.valueOf(dieta.getFechaFinal()));
+            ps.setString(5, dieta.getPaciente().getNombre());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
