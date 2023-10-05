@@ -31,7 +31,6 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -39,7 +38,6 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jtIdDieta = new javax.swing.JTextField();
         jtPesoFinal = new javax.swing.JTextField();
-        jtNombre = new javax.swing.JTextField();
         jtFechaFinal = new javax.swing.JTextField();
         jtPesoInicial = new javax.swing.JTextField();
         jtFechaInicial = new javax.swing.JTextField();
@@ -53,9 +51,7 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
 
         jLabel1.setText("DIETA");
 
-        jLabel2.setText("Paciente");
-
-        jLabel3.setText("Nombre");
+        jLabel2.setText("DNI / Nombre");
 
         jLabel4.setText("ID Dieta");
 
@@ -136,21 +132,16 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
                                 .addGap(0, 12, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(37, 37, 37))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(33, 33, 33)))
-                                    .addComponent(jLabel2))
-                                .addGap(8, 8, 8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(43, 43, 43))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(10, 10, 10)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtIdDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 16, Short.MAX_VALUE))
+                                        .addComponent(jtIdDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 135, Short.MAX_VALUE))
                                     .addComponent(jcbPacientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton6)))))
@@ -162,15 +153,12 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jButton6))
                     .addComponent(jcbPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtIdDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -193,7 +181,7 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
                     .addComponent(jbEliminar)
                     .addComponent(jbLimpiar)
                     .addComponent(jbSalir))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,7 +200,6 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -227,7 +214,6 @@ public class FormularioDieta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtFechaFinal;
     private javax.swing.JTextField jtFechaInicial;
     private javax.swing.JTextField jtIdDieta;
-    private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtPesoFinal;
     private javax.swing.JTextField jtPesoInicial;
     // End of variables declaration//GEN-END:variables
