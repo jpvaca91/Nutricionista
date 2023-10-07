@@ -26,13 +26,13 @@ public class Dieta {
         this.fechaFinal = fechaFinal;
     }
 
-    public Dieta(Paciente paciente, LocalDate fechaInicial, double pesoInicial, double pesoFinal) {
+    public Dieta(Paciente paciente, LocalDate fechaInicial, double pesoInicial, double pesoFinal, LocalDate fechaFinal) {
       
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;
         this.pesoInicial = pesoInicial;
         this.pesoFinal = pesoFinal;
-        
+        this.fechaFinal = fechaFinal;
     }
 
     public int getIdDieta() {
