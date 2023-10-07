@@ -5,6 +5,10 @@
  */
 package nutricionista.Vistas;
 
+import nutricionista.Entidades.Comida;
+import nutricionista.Entidades.Horario;
+import nutricionista.Entidades.Paciente;
+
 /**
  *
  * @author vico_
@@ -51,8 +55,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Comidas");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton1.setText("Buscar");
 
         jButton2.setText("Modificar");
@@ -64,10 +66,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         jButton5.setText("Limpiar");
 
         jButton6.setText("Salir");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setText("Horario");
 
@@ -163,9 +161,9 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<Paciente> jComboBox1;
+    private javax.swing.JComboBox<Comida> jComboBox2;
+    private javax.swing.JComboBox<Horario> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

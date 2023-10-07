@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -96,5 +98,31 @@ public class ComidaData {
             JOptionPane.showMessageDialog(null, "Error al accedeer a la tabla comida");
         }
     }*/
+    public List<Comida> listarComidas() {
+
+        String sql = "SELECT nombre, detalle, cantCalorias, idComida FROM comida ";
+        ArrayList<Comida> comidas = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Comida comida = new Comida();
+                comida.setNombre(rs.getString("nombre"));
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCantCalorias(rs.getInt("cantCalorias"));
+                comida.setIdComidas(rs.getInt("idComida"));
+             
+
+                comidas.add(comida);
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comidas" + ex);
+        }
+        return comidas;
+    }
     
 }

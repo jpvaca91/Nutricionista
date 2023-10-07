@@ -12,15 +12,17 @@ public class DietaComida {
     public DietaComida() {
     }
 
-    public DietaComida(int id, Comida comida, Dieta dieta) {
+    public DietaComida(int id, Comida comida, Dieta dieta, Horario horario) {
         this.id = id;
         this.comida = comida;
         this.dieta = dieta;
+        this.horario = horario;
     }
 
-    public DietaComida(Comida comida, Dieta dieta) {
+    public DietaComida(Comida comida, Dieta dieta, Horario horario) {
         this.comida = comida;
         this.dieta = dieta;
+        this.horario = horario;
     }
 
     public int getId() {
@@ -46,8 +48,15 @@ public class DietaComida {
     public void setDieta(Dieta dieta) {
         this.dieta = dieta;
     }
-    
-    
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
     
     
 }
