@@ -50,6 +50,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jmDieta = new javax.swing.JMenu();
         jmFormularioDieta = new javax.swing.JMenuItem();
+        jmDietaComida = new javax.swing.JMenuItem();
         jmComidas = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jmSeguimiento = new javax.swing.JMenu();
@@ -133,6 +134,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jmDieta.add(jmFormularioDieta);
+
+        jmDietaComida.setText("Formulario dieta comida");
+        jmDietaComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmDietaComidaActionPerformed(evt);
+            }
+        });
+        jmDieta.add(jmDietaComida);
 
         jMenuBar1.add(jmDieta);
 
@@ -254,6 +263,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jmDietaComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaComidaActionPerformed
+        // TODO add your handling code here:
+         Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioDietaComida fdc = new FormularioDietaComida();
+        fdc.setVisible(true);
+        Escritorio.add(fdc);
+        Escritorio.moveToFront(fdc);
+    }//GEN-LAST:event_jmDietaComidaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,6 +333,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jmComidas;
     private javax.swing.JMenu jmDieta;
+    private javax.swing.JMenuItem jmDietaComida;
     private javax.swing.JMenuItem jmFormularioDieta;
     private javax.swing.JMenu jmPaciente;
     private javax.swing.JMenu jmSalir;
