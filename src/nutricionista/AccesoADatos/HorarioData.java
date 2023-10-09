@@ -33,7 +33,7 @@ public class HorarioData {
                 horario.setPeso(rs.getDouble("peso"));
                 horario.setFechaRegistro(rs.getDate("fechaRegistro").toLocalDate());
              
-
+//p
                 horarios.add(horario);
 
             }
