@@ -56,11 +56,10 @@ public class Comida {
     public void setIdComidas(int idComida) {
         this.idComidas = idComida;
     }
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return nombre + " - " + detalle + " - " + cantCalorias;
+    }
+  
 }
