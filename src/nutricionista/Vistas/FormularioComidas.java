@@ -57,6 +57,11 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         jLabel5.setText("Nombre");
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,8 +75,18 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         jbEliminar.setText("Eliminar");
 
         jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jtIdComida.setEditable(false);
 
@@ -188,6 +203,29 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNombreActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        ComidaData cd = new ComidaData();
+        String nombre = jtNombre.getText();
+        Comida comida = new Comida();
+        comida = cd.buscarComida(nombre);
+        
+        jtIdComida.setText(comida.getIdComidas() + "");
+        jtDetalle.setText(comida.getDetalle() + "");
+        jtCalorias.setText(comida.getCantCalorias() +"");
+
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -206,4 +244,18 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtIdComida;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+ public void limpiarCampos() {
+        jtNombre.setText("");
+        jtIdComida.setText("");
+        jtDetalle.setText("");
+        jtCalorias.setText("");
+        
+        
+    }
+
+
+
+
+
 }

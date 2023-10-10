@@ -119,4 +119,34 @@ public class ComidaData {
         return comidas;
     }
 
+    public Comida buscarComida(String nombre) {
+        String sql = "SELECT idComida, nombre, detalle, cantCalorias FROM comida ";
+        Comida comida = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, nombre);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                comida = new Comida();
+                comida.setIdComidas(rs.getInt("idComida"));
+                comida.setNombre(nombre);
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCantCalorias(rs.getInt("cantcalorias"));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "comida no encontrada");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comida" + ex);
+        }
+
+        return comida;
+       
+ 
+    }
+
+
 }
