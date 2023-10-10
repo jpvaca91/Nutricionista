@@ -48,13 +48,14 @@ public class ComidaData {
 
     public void modificarComida(Comida comida) {
 
-        String sql = "UPDATE comida SET detalle=?, cantCalorias=? WHERE idComida=?";
+        String sql = "UPDATE comida SET detalle=?, cantCalorias=?, nombre=? WHERE idComida=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, comida.getDetalle());
             ps.setInt(2, comida.getCantCalorias());
-            ps.setInt(3, comida.getIdComidas());
+            ps.setString(3, comida.getNombre());
+            ps.setInt(4, comida.getIdComidas());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -132,10 +133,10 @@ public class ComidaData {
                 comida.setIdComidas(rs.getInt("idComida"));
                 comida.setNombre(nombre);
                 comida.setDetalle(rs.getString("detalle"));
-                comida.setCantCalorias(rs.getInt("cantcalorias"));
+                comida.setCantCalorias(rs.getInt("cantCalorias"));
 
             } else {
-                JOptionPane.showMessageDialog(null, "comida no encontrada");
+                JOptionPane.showMessageDialog(null, "Comida no encontrada");
             }
             ps.close();
 

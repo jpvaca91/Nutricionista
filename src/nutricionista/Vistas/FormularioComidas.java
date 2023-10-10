@@ -5,8 +5,10 @@
  */
 package nutricionista.Vistas;
 
+import javax.swing.JOptionPane;
 import nutricionista.AccesoADatos.ComidaData;
 import nutricionista.Entidades.Comida;
+import static nutricionista.Vistas.FormularioPaciente.esNumerico;
 
 /**
  *
@@ -71,6 +73,11 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         });
 
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
@@ -225,6 +232,36 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         jtCalorias.setText(comida.getCantCalorias() +"");
 
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+         String calorias;
+
+        calorias = jtCalorias.getText();
+        if (esNumerico(calorias)) {
+            String botones[] = {"SI", "NO"};
+            int eleccion = JOptionPane.showOptionDialog(this, "Desea MODIFICAR esta comida?", "ALERTA!", 0, 0, null, botones, this);
+
+            if (eleccion == JOptionPane.YES_OPTION) {
+                ComidaData comidata = new ComidaData();
+                Comida cd = new Comida();
+
+                cd.setNombre(jtNombre.getText());
+                cd.setDetalle(jtDetalle.getText());
+                cd.setCantCalorias(Integer.parseInt(jtCalorias.getText()));
+
+                comidata.modificarComida(cd);
+            } else {
+                JOptionPane.showMessageDialog(null, "La comida no se modificará");
+            }
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingresar una comida valida");
+        }
+
+
+            
+    }//GEN-LAST:event_jbModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
