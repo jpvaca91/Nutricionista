@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import nutricionista.Entidades.Horario;
+import java.lang.Integer;
 
 
 public class HorarioData {
@@ -25,6 +26,7 @@ public class HorarioData {
 
         String sql = "SELECT idHistorial, paciente, peso, fechaRegistro FROM historial ";
         ArrayList<Horario> horarios = new ArrayList<>();
+       
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -32,7 +34,7 @@ public class HorarioData {
             while (rs.next()) {
                 Horario horario = new Horario();
                 horario.setIdHistorial(rs.getInt("idHistorial"));
-                horario.setPaciente(String.valueOf(rs.getObject(sql)));
+                horario.getPaciente(Integer myInt = Integer.valueOf("idPaciente"););
                 horario.setPeso(rs.getDouble("peso"));
                 horario.setFechaRegistro(rs.getDate("fechaRegistro").toLocalDate());
              

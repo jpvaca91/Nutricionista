@@ -89,7 +89,7 @@ public class Paciente {
     }
 @Override
     public String toString() {
-        return nombre;
+        return nombre+"-"+dni;
     
     
     }

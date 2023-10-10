@@ -32,12 +32,17 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         listaP = pd.listarPacientes();
          cd = new ComidaData();
         listaC = cd.listarComidas();
-        //ed  = new EnumData();
+       // ed  = new EnumData();
        
-        /*cargarCombo();
-        armarCabecera();*/
+       cargarCombo();
+        
     }
-
+ private void cargarCombo() {
+       
+        for(Paciente item: listaP){
+            jcbPaciente.addItem(item);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,6 +93,17 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         jbLimpiar.setText("Limpiar");
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jcbComidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbComidasActionPerformed(evt);
+            }
+        });
 
         jcbHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,11 +194,22 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private void jcbHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbHorarioActionPerformed
         // TODO add your handling code here:
         
+        
     }//GEN-LAST:event_jcbHorarioActionPerformed
 
     private void jcbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbPacienteActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jcbComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbComidasActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jcbComidasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
