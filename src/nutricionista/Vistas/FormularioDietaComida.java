@@ -34,10 +34,10 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         listaC = cd.listarComidas();
        // ed  = new EnumData();
        
-       cargarCombo();
+       cargarComboPaciente();
         
     }
- private void cargarCombo() {
+ private void cargarComboPaciente() {
        
         for(Paciente item: listaP){
             jcbPaciente.addItem(item);
