@@ -5,6 +5,9 @@
  */
 package nutricionista.Vistas;
 
+import nutricionista.AccesoADatos.ComidaData;
+import nutricionista.Entidades.Comida;
+
 /**
  *
  * @author vico_
@@ -56,6 +59,11 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         jbBuscar.setText("Buscar");
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbModificar.setText("Modificar");
 
@@ -97,9 +105,8 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtIdComida, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtDetalle)
-                                .addComponent(jtCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                            .addComponent(jtDetalle)
+                            .addComponent(jtCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbBuscar)
@@ -139,6 +146,23 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+//configuracion del boton "GUARDAR"
+
+        Comida comida = new Comida();
+        ComidaData cd = new ComidaData();
+
+        String nombre = jtNombre.getText();
+        String detalle = jtDetalle.getText();
+        int calorias = Integer.parseInt(jtCalorias.getText());
+
+        comida.setNombre(nombre);
+        comida.setDetalle(detalle);
+        comida.setCantCalorias(calorias);
+
+        cd.guardarComida(comida);
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
