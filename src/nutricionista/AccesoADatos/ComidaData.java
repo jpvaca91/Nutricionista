@@ -120,11 +120,11 @@ public class ComidaData {
     }
 
     public Comida buscarComida(String nombre) {
-        String sql = "SELECT idComida, nombre, detalle, cantCalorias FROM comida ";
+        String sql = "SELECT idComida, nombre, detalle, cantCalorias FROM comida WHERE nombre=? ";
         Comida comida = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, nombre);
+           ps.setString(1, nombre);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
