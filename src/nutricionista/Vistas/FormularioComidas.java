@@ -73,6 +73,8 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
 
         jbSalir.setText("Salir");
 
+        jtNombre.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

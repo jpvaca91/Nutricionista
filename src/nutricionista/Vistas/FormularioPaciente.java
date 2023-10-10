@@ -246,50 +246,50 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
         Boolean estado = false;
-
+        
         String doc;
-
+        
         doc = jtDNI.getText();
         if (esNumerico(doc)) {
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "Ingresar un numero de documento valido");
         }
-
+        
         int dni = Integer.parseInt(jtDNI.getText());
         String nombre = jtNombre.getText();
         String domicilio = jtDomicilio.getText();
         String celular = jtCelular.getText();
-
+        
         if (jrbEstado.isSelected()) {
             estado = true;
         }
-
+        
         Paciente paci = new Paciente(dni, nombre, domicilio, celular, estado);
-        JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
-
+       // JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
+        
         PacienteData pacientedata = new PacienteData();
 
         //int idpaciente = (pacientedata.buscarPaciente(dni)).getIdPaciente();
         //acá guardamos los datos de Dieta del mismo paciente
         try {
-
+            
             Dieta dieta = new Dieta();
-
+            
             dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
             dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
-
+            
             pacientedata.guardarPaciente(paci);
             dieta.setPaciente(paci);
             DietaData dd = new DietaData();
             dd.guardarDieta(dieta);
-
+            
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe introducir pesos correctos");
         }
         limpiarCampos();
-
+        
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -313,12 +313,12 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         Paciente paciente = new Paciente();
         Dieta dieta = new Dieta();
         DietaData dd = new DietaData();
-
+        
         try {
             Integer dni = Integer.parseInt(jtDNI.getText());
             paciente = pd.buscarPaciente(dni);
             dieta = dd.buscarDieta(paciente);
-
+            
             if (paciente != null) {
                 jtNombre.setText(paciente.getNombre());
                 jtDomicilio.setText(paciente.getDomicilio());
@@ -326,7 +326,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                 jrbEstado.setSelected(paciente.isEstado());
                 jtPesoInicial.setText(dieta.getPesoInicial() + "");
                 jtPesoObj.setText(dieta.getPesoFinal() + "");
-                LocalDate lc=dieta.getFechaInicial();
+                LocalDate lc = dieta.getFechaInicial();
                 
                 Date date = Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jdFechaInicial.setDate(date);
@@ -336,7 +336,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
         }
-
+        
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -348,33 +348,53 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         paciente.setEstado(jrbEstado.isSelected());
         paciente.setNombre(jtNombre.getText());
         paciente.setTelefono(jtCelular.getText());
-
+        
         PacienteData pd = new PacienteData();
+        int dni=paciente.getDni();
+        paciente=pd.buscarPaciente(dni);
+        
+        Dieta dieta = new Dieta();
+        
+        dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
+        dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
+        dieta.setPaciente(paciente);
+        
+        
+        DietaData dd = new DietaData();
+        
+        dd.actualizarDieta(dieta);
         pd.actualizarPaciente(paciente);
-
+        
         limpiarCampos();
     }//GEN-LAST:event_jtModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // Configuracion del botón "ELIMINAR"
-
+        Paciente paciente = new Paciente();
+        
         try {
-
+            
             Integer dni = Integer.parseInt(jtDNI.getText());
-
+            
             String botones[] = {"SI", "NO"};
-            int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR este Paciente?", "ALERTA!", 0, 0, null, botones, this);
-
+            int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR este Paciente? (si tiene dieta asignada, tambien se eliminará)", "ALERTA!", 0, 0, null, botones, this);
+            
             if (eleccion == JOptionPane.YES_OPTION) {
                 PacienteData pd = new PacienteData();
+                DietaData dd = new DietaData();
+                
+                paciente = pd.buscarPaciente(dni);
+                
+                dd.eliminarDieta(paciente.getIdPaciente());
                 pd.eliminarPaciente(dni);
                 limpiarCampos();
-
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Paciente no Eliminado");
                 limpiarCampos();
             }
-
+            
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
@@ -419,7 +439,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     public static boolean esNumerico(String cadena) {
         return cadena.matches("\\d+");
     }
-
+    
     public void limpiarCampos() {
         jtDNI.setText("");
         jtNombre.setText("");
@@ -429,6 +449,6 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtPesoObj.setText("");
         jtPesoInicial.setText("");
         jdFechaInicial.setDate(null);
-
+        
     }
 }

@@ -63,11 +63,17 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Nombre");
 
+        jTextField2.setEditable(false);
+
         jLabel5.setText("Peso Inicial");
 
         jLabel6.setText("Peso Actual");
 
         jLabel7.setText("Peso Objetivo");
+
+        jTextField3.setEditable(false);
+
+        jTextField5.setEditable(false);
 
         jRadioButton1.setText("D.Vigente");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +89,8 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jLabel8.setText("ID del Paciente");
 
         jLabel9.setText("Fecha Inicial");
+
+        jTextField7.setEditable(false);
 
         jLabel10.setText("Fecha Actual");
 
@@ -167,7 +175,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                         .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

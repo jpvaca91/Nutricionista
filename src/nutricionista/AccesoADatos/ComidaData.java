@@ -76,6 +76,7 @@ public class ComidaData {
          
          
     }
+    
    /* public void eliminarComida(String nombre) {
 
         String sql = "UPDATE comida SET  WHERE nombre=?";
@@ -98,6 +99,7 @@ public class ComidaData {
             JOptionPane.showMessageDialog(null, "Error al accedeer a la tabla comida");
         }
     }*/
+    
     public List<Comida> listarComidas() {
 
         String sql = "SELECT nombre, detalle, cantCalorias, idComida FROM comida ";

@@ -54,7 +54,7 @@ public class DietaData {
     }
 
     public void actualizarDieta(Dieta dieta) {
-        String sql = "UPDATE dieta SET fechaInicial=?,pesoInicial=?,pesoFinal=?,fechaFinal=?"
+        String sql = "UPDATE dieta SET fechaInicial=?,pesoInicial=?,pesoFinal=?"
                 + " WHERE paciente=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -62,17 +62,16 @@ public class DietaData {
             ps.setDate(1, Date.valueOf(dieta.getFechaInicial()));
             ps.setDouble(2, dieta.getPesoInicial());
             ps.setDouble(3, dieta.getPesoFinal());
-            ps.setDate(4, Date.valueOf(dieta.getFechaFinal()));
-            ps.setString(5, dieta.getPaciente().getNombre());
+            ps.setInt(4, dieta.getPaciente().getIdPaciente());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Dieta actualizada");
-
+                ps.close();
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la Dieta");
+                guardarDieta(dieta);
+
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
@@ -106,5 +105,27 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
         }
         return dieta;
+    }
+
+    public void eliminarDieta(int idPaciente) {
+
+        String sql = "DELETE FROM dieta WHERE paciente=?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPaciente);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Datos iniciales de la Dieta eliminada");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Dieta no encontrada");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta." + ex);
+        }
+
     }
 }

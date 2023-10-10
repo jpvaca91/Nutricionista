@@ -165,6 +165,9 @@
     <Component class="javax.swing.JTextField" name="jtIdComida">
     </Component>
     <Component class="javax.swing.JTextField" name="jtNombre">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtDetalle">
     </Component>

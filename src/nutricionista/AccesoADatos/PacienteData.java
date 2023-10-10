@@ -81,7 +81,7 @@ public class PacienteData {
     }
     
     public void eliminarPaciente(int dni) {
-        String sql = "UPDATE paciente SET estado=0 WHERE dni =? AND dni not in (SELECT dni FROM dieta WHERE dni=?);";
+        String sql = "UPDATE paciente SET estado=0 WHERE dni =? AND dni not in (SELECT idDieta FROM dieta WHERE paciente=?);";
 
 
         try {
