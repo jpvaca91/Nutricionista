@@ -49,7 +49,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmPaciente = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jmDieta = new javax.swing.JMenu();
-        jmFormularioDieta = new javax.swing.JMenuItem();
         jmDietaComida = new javax.swing.JMenuItem();
         jmComidas = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -126,14 +125,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jmDietaActionPerformed(evt);
             }
         });
-
-        jmFormularioDieta.setText("Formulario dieta");
-        jmFormularioDieta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmFormularioDietaActionPerformed(evt);
-            }
-        });
-        jmDieta.add(jmFormularioDieta);
 
         jmDietaComida.setText("Formulario dieta comida");
         jmDietaComida.addActionListener(new java.awt.event.ActionListener() {
@@ -221,17 +212,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jmDietaActionPerformed
-
-    private void jmFormularioDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioDietaActionPerformed
-        // TODO add your handling code here:
-        
-        Escritorio.removeAll();
-        Escritorio.repaint();
-        FormularioDieta fd = new FormularioDieta();
-        fd.setVisible(true);
-        Escritorio.add(fd);
-        Escritorio.moveToFront(fd);
-    }//GEN-LAST:event_jmFormularioDietaActionPerformed
 
     private void jmComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComidasActionPerformed
         // TODO add your handling code here:
@@ -334,7 +314,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmComidas;
     private javax.swing.JMenu jmDieta;
     private javax.swing.JMenuItem jmDietaComida;
-    private javax.swing.JMenuItem jmFormularioDieta;
     private javax.swing.JMenu jmPaciente;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmSeguimiento;
