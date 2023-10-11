@@ -30,10 +30,9 @@ public class ComidaData {
             ps.setString(1, comida.getNombre());
             ps.setString(2, comida.getDetalle());
             ps.setInt(3, comida.getCantCalorias());
-           
 
             ps.executeUpdate();
-            ResultSet rs =ps.getGeneratedKeys();
+            ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
                 comida.setIdComidas(rs.getInt(1));
@@ -73,16 +72,15 @@ public class ComidaData {
 
     }
 
-    /* public void eliminarComida(String nombre) {
+    public void eliminarComida(int idComida) {
 
-        String sql = "UPDATE comida SET  WHERE nombre=?";
+        String sql = "DELETE FROM comida WHERE idComida=?";
 
-       // PreparedStatement ps;
+        
         try {
-           PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            int dni = 0;
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, idComida);
 
-            ps.setInt(1, dni);
             int exito = ps.executeUpdate();
             if (exito == 1) {
 
@@ -94,7 +92,8 @@ public class ComidaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al accedeer a la tabla comida");
         }
-    }*/
+    }
+
     public List<Comida> listarComidas() {
 
         String sql = "SELECT nombre, cantCalorias, detalle FROM comida ";
@@ -125,7 +124,7 @@ public class ComidaData {
         Comida comida = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-           ps.setString(1, nombre);
+            ps.setString(1, nombre);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -145,9 +144,7 @@ public class ComidaData {
         }
 
         return comida;
-       
- 
-    }
 
+    }
 
 }

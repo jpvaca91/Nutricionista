@@ -80,6 +80,11 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +251,7 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
                 ComidaData comidata = new ComidaData();
                 Comida cd = new Comida();
 
+                cd.setIdComidas(Integer.parseInt(jtIdComida.getText()));
                 cd.setNombre(jtNombre.getText());
                 cd.setDetalle(jtDetalle.getText());
                 cd.setCantCalorias(Integer.parseInt(jtCalorias.getText()));
@@ -262,6 +268,27 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
 
             
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // Configuración del boton "ELIMINAR"
+         String botones[] = {"SI", "NO"};
+            int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR esta comida?", "ALERTA!", 0, 0, null, botones, this);
+
+            if (eleccion == JOptionPane.YES_OPTION) {
+            
+                int idComida = Integer.parseInt(jtIdComida.getText());
+                
+                ComidaData cd = new ComidaData();
+                
+                cd.eliminarComida(idComida);
+                
+                limpiarCampos();
+            
+            }else {
+                JOptionPane.showMessageDialog(null, "Comida no eliminada");
+            }
+        
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
