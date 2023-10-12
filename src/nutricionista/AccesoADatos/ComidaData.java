@@ -146,5 +146,35 @@ public class ComidaData {
         return comida;
 
     }
+    public List<Comida> comidasAsignadas(int idComida) {
+        ArrayList<Comida> comidas = new ArrayList<>();
+       
+        String sql = "SELECT  nombre, detalle, cantCalorias FROM comida"
+                + " WHERE comida.idComida = dietacomida.idComida";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+           ps.setInt(1, idComida);
+            ResultSet rs = ps.executeQuery();
+        
+            if(!rs.next())
+                JOptionPane.showMessageDialog(null, "El paciente no tiene comidas asignadas");
+            while (rs.next()) {
+              
+                Comida comida = new Comida();
+                comida.setIdComidas(rs.getInt("idComida"));
+                comida.setNombre(rs.getString("nombre"));
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCantCalorias(rs.getInt("cantCalorias"));
+                comidas.add(comida);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comidas");
+        }
+
+        return comidas;
+
+    }
 
 }

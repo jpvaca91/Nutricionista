@@ -78,7 +78,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         jbModificar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jbLimpiar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jcbComidas = new javax.swing.JComboBox<>();
         jcbHorario = new javax.swing.JComboBox<>();
@@ -104,10 +103,13 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         jbModificar.setText("Modificar");
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
-
-        jbLimpiar.setText("Limpiar");
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -166,11 +168,9 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
                         .addComponent(jbGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbModificar)
-                        .addGap(33, 33, 33)
+                        .addGap(71, 71, 71)
                         .addComponent(jbEliminar)
-                        .addGap(34, 34, 34)
-                        .addComponent(jbLimpiar)
-                        .addGap(34, 34, 34)
+                        .addGap(80, 80, 80)
                         .addComponent(jbSalir)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -217,7 +217,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
                     .addComponent(jbModificar)
                     .addComponent(jbGuardar)
                     .addComponent(jbEliminar)
-                    .addComponent(jbLimpiar)
                     .addComponent(jbSalir))
                 .addGap(21, 21, 21))
         );
@@ -247,6 +246,28 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jcbComidasActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+      /*  Paciente paciente = new Paciente();
+        PacienteData pd = new PacienteData();
+         Comida comida = new Comida();
+        ComidaData cd = new ComidaData();
+        
+        
+
+        String nombre = jcbPaciente.getText();
+        String comida = jcbComidas.getText();
+        String detalle = jcbComidas.getText();
+        int calorias = Integer.parseInt(jcbComidas.getText());
+        
+        paciente.setNombre(nombre);
+        comida.setNombre(nombre);
+        comida.setDetalle(detalle);
+        comida.setCantCalorias(calorias);
+
+        cd.guardarComida(comida);*/
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -258,7 +279,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Comida> jcbComidas;
@@ -286,7 +306,17 @@ public void llenarComboHorario(){
             modelo.addColumn(it);
         }
         jtTabla.setModel(modelo);
+ }
 
+       private void cargarComidas() {
+        Comida select = (Comida) jcbComidas.getSelectedItem();
+        listaC = cd.comidasAsignadas(select.getIdComidas());
+        /*for (Materia m : listaM) {
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
+        }*/
+      
+        
+        
     }
 
 

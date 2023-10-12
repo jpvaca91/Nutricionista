@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import nutricionista.Entidades.Dieta;
+import nutricionista.Entidades.DietaComida;
 import nutricionista.Entidades.Paciente;
 import org.mariadb.jdbc.Statement;
 
@@ -43,7 +44,7 @@ public class DietaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 dieta.setIdDieta(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Dieta guardada");
+                JOptionPane.showMessageDialog(null, "Datos guardados");
             }
             ps.close();
 
@@ -128,4 +129,30 @@ public class DietaData {
         }
 
     }
+  /*  public void guardarDietaComida(DietaComida dietacomida) {
+        String sql = "INSERT INTO dietacomida (horario)"
+                + "VALUES (?) AND comida (nombre,detalle,cantCalorias) VALUES (?,?,?)";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, dietacomida.getPaciente().getIdPaciente());
+            ps.setString(2, comida.getNombre());
+            ps.setString(3, comida.getDetalle());
+            ps.setInt(4, comida.getCantCalorias());
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                dietacomida.setIdPaciente(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Datos guardados");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos" + ex);
+        }
+
+    }*/
 }
