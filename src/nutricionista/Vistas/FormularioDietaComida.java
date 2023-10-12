@@ -7,6 +7,7 @@ package nutricionista.Vistas;
 
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import nutricionista.AccesoADatos.ComidaData;
 import nutricionista.Entidades.HorarioEspecifico;
 import nutricionista.AccesoADatos.PacienteData;
@@ -24,6 +25,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private Paciente paciSeleccionado;
     private ComidaData cd;
     private HorarioEspecifico ed;
+    private DefaultTableModel modelo;
     private List<Paciente> listaP;
     private List<Comida> listaC;
 
@@ -32,6 +34,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
          llenarComboHorario();
         pd = new PacienteData();
         listaP = pd.listarPacientes();
+        modelo = new DefaultTableModel();
         cd = new ComidaData();
         listaC = cd.listarComidas();
         // ed  = new HorarioEspecificoData();
@@ -39,6 +42,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
        
         cargarComboPaciente();
         cargarComboComida();
+        armarCabecera();
     }
 
     private void cargarComboPaciente() {
