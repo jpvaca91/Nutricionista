@@ -6,8 +6,9 @@
 package nutricionista.Vistas;
 
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import nutricionista.AccesoADatos.ComidaData;
-import nutricionista.AccesoADatos.EnumData;
+import nutricionista.Entidades.HorarioEspecifico;
 import nutricionista.AccesoADatos.PacienteData;
 import nutricionista.Entidades.Comida;
 import nutricionista.Entidades.Horario;
@@ -22,18 +23,20 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private PacienteData pd;
     private Paciente paciSeleccionado;
     private ComidaData cd;
-    private EnumData ed;
+    private HorarioEspecifico ed;
     private List<Paciente> listaP;
     private List<Comida> listaC;
 
     public FormularioDietaComida() {
         initComponents();
+         llenarComboHorario();
         pd = new PacienteData();
         listaP = pd.listarPacientes();
         cd = new ComidaData();
         listaC = cd.listarComidas();
-        // ed  = new EnumData();
-
+        // ed  = new HorarioEspecificoData();
+       
+       
         cargarComboPaciente();
         cargarComboComida();
     }
@@ -212,6 +215,8 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     private void jcbHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbHorarioActionPerformed
         // TODO add your handling code here:
+       
+        
 
 
     }//GEN-LAST:event_jcbHorarioActionPerformed
@@ -245,8 +250,16 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Comida> jcbComidas;
-    private javax.swing.JComboBox<nutricionista.Entidades.Horario> jcbHorario;
+    private javax.swing.JComboBox<HorarioEspecifico> jcbHorario;
     private javax.swing.JComboBox<Paciente> jcbPaciente;
     private javax.swing.JTextField jtIdDieta;
     // End of variables declaration//GEN-END:variables
+
+public void llenarComboHorario(){
+    
+    
+        jcbHorario.setModel(new DefaultComboBoxModel<>(HorarioEspecifico.values()));
+    }
 }
+
+
