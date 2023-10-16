@@ -22,7 +22,7 @@ public class DietaComidaData {
 }
     public void GuardarDietaComida(DietaComida dietaComida){
         
-        String sql="INSERT INTO dietacomida(comida, dieta, horario) VALUES (?, ?,?)";
+        String sql="INSERT INTO dietacomida (comida, dieta, horario) VALUES (?, ?, ?)";
         
          try {
              PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

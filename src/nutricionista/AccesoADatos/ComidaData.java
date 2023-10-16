@@ -96,7 +96,7 @@ public class ComidaData {
 
     public List<Comida> listarComidas() {
 
-        String sql = "SELECT nombre, cantCalorias, detalle FROM comida ";
+        String sql = "SELECT nombre, cantCalorias, detalle, idComida FROM comida ";
         ArrayList<Comida> comidas = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -107,6 +107,8 @@ public class ComidaData {
                 comida.setNombre(rs.getString("nombre"));
                 comida.setCantCalorias(rs.getInt("cantCalorias"));
                 comida.setDetalle(rs.getString("detalle"));
+                comida.setIdComidas(rs.getInt("idComida"));
+                
 
                 comidas.add(comida);
 

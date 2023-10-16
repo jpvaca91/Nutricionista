@@ -36,15 +36,14 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     public FormularioDietaComida() {
         initComponents();
-         llenarComboHorario();
+        llenarComboHorario();
         pd = new PacienteData();
         listaP = pd.listarPacientes();
         modelo = new DefaultTableModel();
         cd = new ComidaData();
         listaC = cd.listarComidas();
         // ed  = new HorarioEspecificoData();
-       
-       
+
         cargarComboPaciente();
         cargarComboComida();
         armarCabecera();
@@ -230,8 +229,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     private void jcbHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbHorarioActionPerformed
         // TODO add your handling code here:
-       
-        
 
 
     }//GEN-LAST:event_jcbHorarioActionPerformed
@@ -253,20 +250,19 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
         Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
-         Comida comida = (Comida) jcbComidas.getSelectedItem();
-        ComidaData cd = new ComidaData();
-        
-        Dieta dieta = null;
-        DietaData dd= new DietaData();
-        dieta = dd.buscarDieta(paciente);      
-        HorarioEspecifico horario=(HorarioEspecifico)jcbHorario.getSelectedItem();
-        
-        DietaComida dietaComida= new DietaComida();
+        Comida comida = (Comida) jcbComidas.getSelectedItem();
+        HorarioEspecifico horario = (HorarioEspecifico) jcbHorario.getSelectedItem();
+
+        //ComidaData cd = new ComidaData();
+        DietaData dd = new DietaData();
+        Dieta dieta = dd.buscarDieta(paciente);
+
+        DietaComida dietaComida = new DietaComida();
         dietaComida.setComida(comida);
         dietaComida.setDieta(dieta);
         dietaComida.setHorario(horario);
-        
-        DietaComidaData dcd =new DietaComidaData();
+
+        DietaComidaData dcd = new DietaComidaData();
         dcd.GuardarDietaComida(dietaComida);
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -289,15 +285,13 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
 
-public void llenarComboHorario(){
-    
-    
+    public void llenarComboHorario() {
+
         jcbHorario.setModel(new DefaultComboBoxModel<>(HorarioEspecifico.values()));
     }
 
- private void armarCabecera() {
+    private void armarCabecera() {
 
-       
         ArrayList<Object> filaCabecera = new ArrayList<>();
         filaCabecera.add("Horario");
         filaCabecera.add("Comida");
@@ -308,26 +302,15 @@ public void llenarComboHorario(){
             modelo.addColumn(it);
         }
         jtTabla.setModel(modelo);
- }
+    }
 
-       private void cargarComidas() {
+    private void cargarComidas() {
         Comida select = (Comida) jcbComidas.getSelectedItem();
         listaC = cd.comidasAsignadas(select.getIdComidas());
         /*for (Materia m : listaM) {
             modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }*/
-      
-        
-        
+
     }
 
-
-
-
-
-
-
-
 }
-
-
