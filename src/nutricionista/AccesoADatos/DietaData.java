@@ -82,7 +82,7 @@ public class DietaData {
 
     public Dieta buscarDieta(Paciente paciente) {
 
-        String sql = "Select fechaInicial, pesoInicial, pesoFinal from dieta where paciente=?";
+        String sql = "Select fechaInicial, pesoInicial, pesoFinal, idDieta from dieta where paciente=?";
         Dieta dieta = null;
 
         PreparedStatement ps;
@@ -97,6 +97,7 @@ public class DietaData {
                 dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
                 dieta.setPesoInicial(rs.getDouble("pesoInicial"));
                 dieta.setPesoFinal(rs.getDouble("pesoFinal"));
+                dieta.setIdDieta(rs.getInt("idDieta"));
             } else {
                 JOptionPane.showMessageDialog(null, "Dieta no encontrada");
             }

@@ -3,24 +3,24 @@ package nutricionista.Entidades;
 
 import java.time.LocalDate;
  
-public class Horario {
+public class Historial {
      
     private int idHistorial;
     private Paciente paciente;
     private double peso;
     private LocalDate fechaRegistro;
 
-    public Horario() {
+    public Historial() {
     }
 
-    public Horario(int idHistorial, Paciente paciente, double peso, LocalDate fechaRegistro) {
+    public Historial(int idHistorial, Paciente paciente, double peso, LocalDate fechaRegistro) {
         this.idHistorial = idHistorial;
         this.paciente = paciente;
         this.peso = peso;
         this.fechaRegistro = fechaRegistro;
     }
 
-    public Horario(Paciente paciente, double peso, LocalDate fechaRegistro) {
+    public Historial(Paciente paciente, double peso, LocalDate fechaRegistro) {
         this.paciente = paciente;
         this.peso = peso;
         this.fechaRegistro = fechaRegistro;

@@ -7,19 +7,19 @@ public class DietaComida {
     private int id;
     private Comida comida;
     private Dieta dieta;
-    private Horario horario;
+    private HorarioEspecifico horario;
 
     public DietaComida() {
     }
 
-    public DietaComida(int id, Comida comida, Dieta dieta, Horario horario) {
+    public DietaComida(int id, Comida comida, Dieta dieta, HorarioEspecifico horario) {
         this.id = id;
         this.comida = comida;
         this.dieta = dieta;
         this.horario = horario;
     }
 
-    public DietaComida(Comida comida, Dieta dieta, Horario horario) {
+    public DietaComida(Comida comida, Dieta dieta, HorarioEspecifico horario) {
         this.comida = comida;
         this.dieta = dieta;
         this.horario = horario;
@@ -49,11 +49,11 @@ public class DietaComida {
         this.dieta = dieta;
     }
 
-    public Horario getHorario() {
+    public HorarioEspecifico getHorario() {
         return horario;
     }
 
-    public void setHorario(Horario horario) {
+    public void setHorario(HorarioEspecifico horario) {
         this.horario = horario;
     }
 

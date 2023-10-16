@@ -10,10 +10,14 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import nutricionista.AccesoADatos.ComidaData;
+import nutricionista.AccesoADatos.DietaComidaData;
+import nutricionista.AccesoADatos.DietaData;
 import nutricionista.Entidades.HorarioEspecifico;
 import nutricionista.AccesoADatos.PacienteData;
 import nutricionista.Entidades.Comida;
-import nutricionista.Entidades.Horario;
+import nutricionista.Entidades.Dieta;
+import nutricionista.Entidades.DietaComida;
+import nutricionista.Entidades.Historial;
 import nutricionista.Entidades.Paciente;
 
 /**
@@ -248,24 +252,22 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-      /*  Paciente paciente = new Paciente();
-        PacienteData pd = new PacienteData();
-         Comida comida = new Comida();
+        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+         Comida comida = (Comida) jcbComidas.getSelectedItem();
         ComidaData cd = new ComidaData();
         
+        Dieta dieta = null;
+        DietaData dd= new DietaData();
+        dieta = dd.buscarDieta(paciente);      
+        HorarioEspecifico horario=(HorarioEspecifico)jcbHorario.getSelectedItem();
         
-
-        String nombre = jcbPaciente.getText();
-        String comida = jcbComidas.getText();
-        String detalle = jcbComidas.getText();
-        int calorias = Integer.parseInt(jcbComidas.getText());
+        DietaComida dietaComida= new DietaComida();
+        dietaComida.setComida(comida);
+        dietaComida.setDieta(dieta);
+        dietaComida.setHorario(horario);
         
-        paciente.setNombre(nombre);
-        comida.setNombre(nombre);
-        comida.setDetalle(detalle);
-        comida.setCantCalorias(calorias);
-
-        cd.guardarComida(comida);*/
+        DietaComidaData dcd =new DietaComidaData();
+        dcd.GuardarDietaComida(dietaComida);
     }//GEN-LAST:event_jbGuardarActionPerformed
 
 
