@@ -209,6 +209,7 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         comida.setCantCalorias(calorias);
 
         cd.guardarComida(comida);
+        limpiarCampos();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
