@@ -130,7 +130,8 @@ public class DietaData {
         }
 
     }
-  /*  public void guardarDietaComida(DietaComida dietacomida) {
+
+    /*  public void guardarDietaComida(DietaComida dietacomida) {
         String sql = "INSERT INTO dietacomida (horario)"
                 + "VALUES (?) AND comida (nombre,detalle,cantCalorias) VALUES (?,?,?)";
 
@@ -156,4 +157,39 @@ public class DietaData {
         }
 
     }*/
+
+    public Dieta buscarDietaPorId(int idDieta) {
+
+        String sql = "Select paciente, fechaInicial, pesoInicial, pesoFinal, idDieta from dieta where idDieta=?";
+        Dieta dieta = null;
+        Paciente paciente = null;
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, idDieta);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                dieta = new Dieta();
+                paciente = new Paciente();
+                int idPaciente = rs.getInt("paciente");
+                PacienteData pd =new PacienteData();
+                
+                dieta.setPaciente(pd.buscarPacientePorId(idPaciente));
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoFinal(rs.getDouble("pesoFinal"));
+                dieta.setIdDieta(rs.getInt("idDieta"));
+            } else {
+                JOptionPane.showMessageDialog(null, "Dieta no encontrada");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+        }
+        return dieta;
+    }
+
 }

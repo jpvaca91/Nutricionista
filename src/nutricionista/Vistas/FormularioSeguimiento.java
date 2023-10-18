@@ -45,6 +45,11 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         });
 
         jrbTerminadas.setText("Dietas Terminadas");
+        jrbTerminadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbTerminadasActionPerformed(evt);
+            }
+        });
 
         jrbTodas.setText("Todas las dietas");
 
@@ -119,6 +124,10 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
     private void jrbActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivasActionPerformed
         // Listar dietas activas
     }//GEN-LAST:event_jrbActivasActionPerformed
+
+    private void jrbTerminadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTerminadasActionPerformed
+        // Listar dietas terminadas
+    }//GEN-LAST:event_jrbTerminadasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

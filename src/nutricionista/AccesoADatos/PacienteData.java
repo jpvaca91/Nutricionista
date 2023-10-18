@@ -164,4 +164,36 @@ public class PacienteData {
         }
         return pacientes;
     }
+    
+     public Paciente buscarPacientePorId(int idPaciente) {
+        
+        String sql = "SELECT dni, nombre, domicilio, telefono,estado, idPaciente FROM paciente WHERE idPaciente= ? ";
+        Paciente paciente = null;
+        
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, idPaciente);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                paciente = new Paciente();
+                paciente.setDni(rs.getInt("dni"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getString("telefono"));
+                paciente.setEstado(rs.getBoolean("estado"));
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "paciente no encontrado");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+        }
+        return paciente;
+    }
 }//obtenerPacientePorId-obtenerTodo

@@ -48,7 +48,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         cargarComboPaciente();
         cargarComboComida();
         armarCabecera();
-        
+        borrarTabla();
     }
 
     private void cargarComboPaciente() {
@@ -150,6 +150,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtTabla.setEnabled(false);
         jScrollPane1.setViewportView(jtTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,25 +227,41 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     private void jcbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacienteActionPerformed
         // TODO add your handling code here:
-       // actualizarTabla();
+
+        actualizarTabla();
 
 
     }//GEN-LAST:event_jcbPacienteActionPerformed
     public void actualizarTabla() {
+        borrarTabla();
+
         Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
         DietaData dd = new DietaData();
         Dieta dieta = dd.buscarDieta(paciente);
 
         DietaComidaData dcd = new DietaComidaData();
-        List<Object> comidas = dcd.consultaPorPaciente(dieta);
 
-        for (int i = 0; i < comidas.size(); i++) {
-            modelo.addRow((Object[]) comidas.get(i));
+        for (DietaComida obj : dcd.consultaPorPaciente(dieta)) {
+
+            Object[] fila = new Object[]{obj.getHorario().getHorarioEspecifico(), obj.getComida().getNombre(), obj.getComida().getDetalle(), obj.getComida().getCantCalorias()};
+            modelo.addRow(fila);
+
         }
-        JOptionPane.showMessageDialog(null, "tabla actualizada");
+        jtTabla.setModel(modelo);
 
     }
 
+    public void borrarTabla() {
+
+        int cantfilas = jtTabla.getRowCount();
+
+        if (cantfilas >= 1) {
+            modelo.setNumRows(0);
+            //JOptionPane.showMessageDialog(null, "filas eliminadas");
+
+        }
+
+    }
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
@@ -273,7 +290,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
         DietaComidaData dcd = new DietaComidaData();
         dcd.GuardarDietaComida(dietaComida);
-     //   actualizarTabla();
+        actualizarTabla();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
