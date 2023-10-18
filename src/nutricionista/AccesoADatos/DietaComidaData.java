@@ -1,4 +1,3 @@
-
 package nutricionista.AccesoADatos;
 
 import java.sql.Connection;
@@ -15,10 +14,9 @@ import nutricionista.Entidades.DietaComida;
 import nutricionista.Entidades.HorarioEspecifico;
 import org.mariadb.jdbc.Statement;
 
-
 public class DietaComidaData {
-    
-     private Connection con = null;
+
+    private Connection con = null;
 
     public DietaComidaData() {
         con = Coneccion.getConexion();
@@ -53,7 +51,7 @@ public class DietaComidaData {
     public List<DietaComida> consultaPorPaciente(Dieta dieta) {
         List<DietaComida> dietaComidas = new ArrayList<>();
         HorarioEspecifico horario = null;
-        
+
         String sql = "SELECT dietacomida.horario, dietacomida.comida, dietacomida.dieta  FROM "
                 + " dietacomida WHERE dietacomida.dieta=? ";
 
@@ -69,22 +67,7 @@ public class DietaComidaData {
             while (rs.next()) {
                 String hora = rs.getString("horario");
 
-                if (hora == "ALMUERZO") {
-                    horario = HorarioEspecifico.ALMUERZO;
-
-                } else if (hora == "DESAYUNO") {
-                    horario = HorarioEspecifico.DESAYUNO;
-
-                } else if (hora == "MERIENDA") {
-                    horario = HorarioEspecifico.MERIENDA;
-
-                } else if (hora == "CENA") {
-                    horario = HorarioEspecifico.CENA;
-
-                } else {
-                    horario = HorarioEspecifico.SNACK;
-
-                }
+                horario = HorarioEspecifico.valueOf(hora);
 
                 int comida = rs.getInt("comida");
                 ComidaData cd = new ComidaData();
@@ -102,9 +85,9 @@ public class DietaComidaData {
         }
 
         return dietaComidas;
-    
-}
-   /* public void GuardarDietaComida(DietaComida dietaComida){
+
+    }
+    /* public void GuardarDietaComida(DietaComida dietaComida){
         
         String sql="INSERT INTO dietacomida(comida, dieta, horario) VALUES (?,?,?)";
         
