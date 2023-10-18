@@ -5,6 +5,7 @@
  */
 package nutricionista.Vistas;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -40,7 +41,13 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         llenarComboHorario();
         pd = new PacienteData();
         listaP = pd.listarPacientes();
-        modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         cd = new ComidaData();
         listaC = cd.listarComidas();
         // ed  = new HorarioEspecificoData();
@@ -49,6 +56,8 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         cargarComboComida();
         armarCabecera();
         borrarTabla();
+        actualizarTabla();
+
     }
 
     private void cargarComboPaciente() {
@@ -150,7 +159,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtTabla.setEnabled(false);
+        jtTabla.setRowSelectionAllowed(true);
         jScrollPane1.setViewportView(jtTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,36 +241,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jcbPacienteActionPerformed
-    public void actualizarTabla() {
-        borrarTabla();
 
-        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
-        DietaData dd = new DietaData();
-        Dieta dieta = dd.buscarDieta(paciente);
-
-        DietaComidaData dcd = new DietaComidaData();
-
-        for (DietaComida obj : dcd.consultaPorPaciente(dieta)) {
-
-            Object[] fila = new Object[]{obj.getHorario().getHorarioEspecifico(), obj.getComida().getNombre(), obj.getComida().getDetalle(), obj.getComida().getCantCalorias()};
-            modelo.addRow(fila);
-
-        }
-        jtTabla.setModel(modelo);
-
-    }
-
-    public void borrarTabla() {
-
-        int cantfilas = jtTabla.getRowCount();
-
-        if (cantfilas >= 1) {
-            modelo.setNumRows(0);
-            //JOptionPane.showMessageDialog(null, "filas eliminadas");
-
-        }
-
-    }
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
@@ -296,15 +276,58 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
 
-        /*int filaS = jtTabla.getSelectedRow();
-        if (filaS != -1) {
-            modelo.removeRow(filaS);
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-        }
-         */
-    }//GEN-LAST:event_jbEliminarActionPerformed
+        int filaS = jtTabla.getSelectedRow();
 
+        String botones[] = {"SI", "NO"};
+        int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR esta Comida al Paciente?", "ALERTA!", 0, 0, null, botones, this);
+
+        if (eleccion == JOptionPane.YES_OPTION) {
+            Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+            DietaData dd = new DietaData();
+            Dieta dieta = dd.buscarDieta(paciente);
+
+            DietaComidaData dcd = new DietaComidaData();
+
+            List<DietaComida> ldc = dcd.consultaPorPaciente(dieta);
+
+            DietaComida dc = ldc.get(filaS);
+
+            dcd.eliminarDietaComida(dc);
+            actualizarTabla();
+
+        }
+
+    }//GEN-LAST:event_jbEliminarActionPerformed
+    public void actualizarTabla() {
+        borrarTabla();
+
+        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+        DietaData dd = new DietaData();
+        Dieta dieta = dd.buscarDieta(paciente);
+
+        DietaComidaData dcd = new DietaComidaData();
+
+        for (DietaComida obj : dcd.consultaPorPaciente(dieta)) {
+
+            Object[] fila = new Object[]{obj.getHorario().getHorarioEspecifico(), obj.getComida().getNombre(), obj.getComida().getDetalle(), obj.getComida().getCantCalorias()};
+            modelo.addRow(fila);
+
+        }
+        jtTabla.setModel(modelo);
+
+    }
+
+    public void borrarTabla() {
+
+        int cantfilas = jtTabla.getRowCount();
+
+        if (cantfilas >= 1) {
+            modelo.setNumRows(0);
+            //JOptionPane.showMessageDialog(null, "filas eliminadas");
+
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
