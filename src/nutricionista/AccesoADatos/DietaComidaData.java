@@ -5,10 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.DietaComida;
+import nutricionista.Entidades.HorarioEspecifico;
 import org.mariadb.jdbc.Statement;
 
 
@@ -18,9 +22,6 @@ public class DietaComidaData {
 
     public DietaComidaData() {
         con = Coneccion.getConexion();
-<<<<<<< HEAD
-    
-=======
 
     }
 
@@ -101,10 +102,9 @@ public class DietaComidaData {
         }
 
         return dietaComidas;
-    }
->>>>>>> c60813be8a9f00ad7c8f9a39fd2cf9cd00de7155
+    
 }
-    public void GuardarDietaComida(DietaComida dietaComida){
+   /* public void GuardarDietaComida(DietaComida dietaComida){
         
         String sql="INSERT INTO dietacomida(comida, dieta, horario) VALUES (?,?,?)";
         
@@ -128,5 +128,5 @@ public class DietaComidaData {
              JOptionPane.showMessageDialog(null ,"Error al acceder a la bd Dietacomida" +ex);
          }
          
-    }
+    }*/
 }
