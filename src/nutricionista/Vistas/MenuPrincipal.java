@@ -53,7 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmComidas = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jmSeguimiento = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiPaciente = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
@@ -154,14 +154,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jmComidas);
 
         jmSeguimiento.setText("Seguimiento");
-
-        jMenuItem1.setText("Por paciente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmSeguimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmSeguimientoActionPerformed(evt);
             }
         });
-        jmSeguimiento.add(jMenuItem1);
+
+        jmiPaciente.setText("Por paciente");
+        jmiPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPacienteActionPerformed(evt);
+            }
+        });
+        jmSeguimiento.add(jmiPaciente);
 
         jMenuItem2.setText("Por dieta");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -229,18 +234,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.moveToFront(fc);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        Escritorio.removeAll();
-        Escritorio.repaint();
-        FormularioHistorial fspp = new FormularioHistorial();
-        fspp.setVisible(true);
-        Escritorio.add(fspp);
-        Escritorio.moveToFront(fspp);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+         Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioSeguimiento fs = new FormularioSeguimiento();
+        fs.setVisible(true);
+        Escritorio.add(fs);
+        Escritorio.moveToFront(fs);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jmDietaComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaComidaActionPerformed
@@ -252,6 +253,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.add(fdc);
         Escritorio.moveToFront(fdc);
     }//GEN-LAST:event_jmDietaComidaActionPerformed
+
+    private void jmSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSeguimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmSeguimientoActionPerformed
+
+    private void jmiPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPacienteActionPerformed
+        // TODO add your handling code here:
+           Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioHistorial fdh = new FormularioHistorial();
+        fdh.setVisible(true);
+        Escritorio.add(fdh);
+        Escritorio.moveToFront(fdh);
+    }//GEN-LAST:event_jmiPacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,7 +315,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
@@ -317,6 +331,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmPaciente;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmSeguimiento;
+    private javax.swing.JMenuItem jmiPaciente;
     // End of variables declaration//GEN-END:variables
 
 

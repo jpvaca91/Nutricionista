@@ -1,23 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nutricionista.Vistas;
 
-/**
- *
- * @author vico_
- */
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import nutricionista.AccesoADatos.ComidaData;
+import nutricionista.AccesoADatos.PacienteData;
+import nutricionista.Entidades.Comida;
+import nutricionista.Entidades.Paciente;
+
+
 public class FormularioSeguimiento extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioSeguimiento
-     */
+    private PacienteData pd;
+    private ComidaData cd;
+    private DefaultTableModel modelo;
+    private List<Paciente> listaP;
+    private List<Comida> listaC;
+    
+    
     public FormularioSeguimiento() {
-        initComponents();
+      /*  initComponents();
+         pd = new PacienteData();
+        modelo = new DefaultTableModel();
+        cd = new ComidaData();
+        listaV = cd.listarVigente();
+        listaF = pd.listarFinalizadas();
+        listaT = pd.listarTodas();*/
+     armarCabecera();
+    
     }
 
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +44,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jrbActivas = new javax.swing.JRadioButton();
-        jrbTerminadas = new javax.swing.JRadioButton();
+        jrbFinalizadas = new javax.swing.JRadioButton();
         jrbTodas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabla2 = new javax.swing.JTable();
@@ -44,10 +59,10 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbTerminadas.setText("Dietas Terminadas");
-        jrbTerminadas.addActionListener(new java.awt.event.ActionListener() {
+        jrbFinalizadas.setText("Dietas Finalizadas");
+        jrbFinalizadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbTerminadasActionPerformed(evt);
+                jrbFinalizadasActionPerformed(evt);
             }
         });
 
@@ -64,6 +79,15 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtTabla2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jtTabla2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(jtTabla2);
 
         jbSalir.setText("Salir");
@@ -88,7 +112,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jrbActivas)
                                     .addGap(37, 37, 37)
-                                    .addComponent(jrbTerminadas))
+                                    .addComponent(jrbFinalizadas))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(163, 163, 163)
                                     .addComponent(jLabel1)))
@@ -104,7 +128,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbActivas)
-                    .addComponent(jrbTerminadas)
+                    .addComponent(jrbFinalizadas)
                     .addComponent(jrbTodas))
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,9 +149,28 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // Listar dietas activas
     }//GEN-LAST:event_jrbActivasActionPerformed
 
-    private void jrbTerminadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTerminadasActionPerformed
+    private void jrbFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFinalizadasActionPerformed
         // Listar dietas terminadas
-    }//GEN-LAST:event_jrbTerminadasActionPerformed
+    }//GEN-LAST:event_jrbFinalizadasActionPerformed
+
+    private void jtTabla2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jtTabla2AncestorAdded
+        // TODO add your handling code here:
+        // private void armarCabecera() {
+
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("Paciente");
+        filaCabecera.add("Ult. Consulta");
+        filaCabecera.add("Ult. Peso");
+        filaCabecera.add("Peso Objetivo");
+        filaCabecera.add("Dieta Terminada");
+        filaCabecera.add("Dieta Activa");
+
+        for (Object it : filaCabecera) {
+            modelo.addColumn(it);
+        }
+        jtTabla2.setModel(modelo);
+    
+    }//GEN-LAST:event_jtTabla2AncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -135,8 +178,14 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbActivas;
-    private javax.swing.JRadioButton jrbTerminadas;
+    private javax.swing.JRadioButton jrbFinalizadas;
     private javax.swing.JRadioButton jrbTodas;
     private javax.swing.JTable jtTabla2;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+   
+

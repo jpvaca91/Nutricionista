@@ -30,7 +30,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jrbActivas" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="jrbTerminadas" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbFinalizadas" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jrbActivas" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jrbTerminadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jrbFinalizadas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jrbTodas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -80,12 +80,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbActivasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jrbTerminadas">
+    <Component class="javax.swing.JRadioButton" name="jrbFinalizadas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dietas Terminadas"/>
+        <Property name="text" type="java.lang.String" value="Dietas Finalizadas"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbTerminadasActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbFinalizadasActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbTodas">
@@ -111,6 +111,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jtTabla2AncestorAdded"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
