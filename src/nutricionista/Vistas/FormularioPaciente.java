@@ -336,7 +336,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         try {
             Integer dni = Integer.parseInt(jtDNI.getText());
             paciente = pd.buscarPaciente(dni);
-            dieta = dd.buscarDieta(paciente);
+            dieta = dd.buscarDietaCompleta(paciente);
 
             if (paciente != null) {
                 jtNombre.setText(paciente.getNombre());
@@ -345,10 +345,14 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                 jrbEstado.setSelected(paciente.isEstado());
                 jtPesoInicial.setText(dieta.getPesoInicial() + "");
                 jtPesoObj.setText(dieta.getPesoFinal() + "");
-                LocalDate lc = dieta.getFechaInicial();
-
-                Date date = Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                jdFechaInicial.setDate(date);
+                LocalDate lci = dieta.getFechaInicial();
+                LocalDate lcf= dieta.getFechaFinal();
+                Date dateF = Date.from(lcf.atStartOfDay(ZoneId.systemDefault()).toInstant());
+               
+                Date dateI = Date.from(lci.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                jdFechaInicial.setDate(dateI);
+                
+                jdFechaFin.setDate(dateF);
 
             }
         } catch (NumberFormatException nf) {

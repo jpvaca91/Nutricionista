@@ -364,13 +364,13 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         jtTabla.setModel(modelo);
     }
 
-    private void cargarComidas() {
+   /* private void cargarComidas() {
         Comida select = (Comida) jcbComidas.getSelectedItem();
         listaC = cd.comidasAsignadas(select.getIdComidas());
-        /*for (Materia m : listaM) {
+        for (Materia m : listaM) {
             modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
-        }*/
+        }
 
-    }
+    }*/
 
 }

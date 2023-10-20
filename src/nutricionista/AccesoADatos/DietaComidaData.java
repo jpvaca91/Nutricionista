@@ -60,9 +60,9 @@ public class DietaComidaData {
             ps.setInt(1, dieta.getIdDieta());
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "Error en el listado de comidas asignadas al paciente");
-            }
+           // if (!rs.next()) {
+            //    JOptionPane.showMessageDialog(null, "Paciente sin dieta asignada, listo para cargar");
+         //   }
 
             while (rs.next()) {
                 String hora = rs.getString("horario");
