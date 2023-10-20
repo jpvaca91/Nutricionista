@@ -236,30 +236,8 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
     private void jcbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacienteActionPerformed
 
-        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
-        DietaData dd = new DietaData();
-        Dieta dieta = new Dieta();
-        Dieta dieta2 = new Dieta();
         limpiarCampos();
-        try {
-
-            dieta = dd.buscarDietaCompleta(paciente);
-            jtPesoInicial.setText(dieta.getPesoInicial() + "");
-            jtFechaInicial.setText(dieta.getFechaInicial() + "");
-            jtPesoObjetivo.setText(dieta.getPesoFinal() + "");
-            jtPesoAnt.setText(dieta.getPesoActual() + "");
-            jtFechaAnt.setText(dieta.getFechaActual() + "");
-            
-        } catch (NullPointerException np) {
-            dieta2 = dd.buscarDieta(paciente);
-            jtPesoInicial.setText(dieta2.getPesoInicial() + "");
-            jtFechaInicial.setText(dieta2.getFechaInicial() + "");
-            jtPesoObjetivo.setText(dieta2.getPesoFinal() + "");
-            JOptionPane.showMessageDialog(null, "Es el primer control del paciente seleccionado");
-            
-        }
-
-
+        actualizarDatos();
     }//GEN-LAST:event_jcbPacienteActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -290,7 +268,8 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             dd.actualizarHistorial(dieta);
 
             limpiarCampos();
-
+            actualizarDatos();
+            
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe introducir un peso correcto");
         }
@@ -332,5 +311,30 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jtFechaAnt.setText("");
         jdcFechaAct.setDate(null);
 
+    }
+    
+    public void actualizarDatos(){
+         Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+        DietaData dd = new DietaData();
+        Dieta dieta = new Dieta();
+        Dieta dieta2 = new Dieta();
+        limpiarCampos();
+        try {
+
+            dieta = dd.buscarDietaCompleta(paciente);
+            jtPesoInicial.setText(dieta.getPesoInicial() + "");
+            jtFechaInicial.setText(dieta.getFechaInicial() + "");
+            jtPesoObjetivo.setText(dieta.getPesoFinal() + "");
+            jtPesoAnt.setText(dieta.getPesoActual() + "");
+            jtFechaAnt.setText(dieta.getFechaActual() + "");
+            
+        } catch (NullPointerException np) {
+            dieta2 = dd.buscarDieta(paciente);
+            jtPesoInicial.setText(dieta2.getPesoInicial() + "");
+            jtFechaInicial.setText(dieta2.getFechaInicial() + "");
+            jtPesoObjetivo.setText(dieta2.getPesoFinal() + "");
+            JOptionPane.showMessageDialog(null, "Es el primer control del paciente seleccionado");
+            
+        }
     }
 }
