@@ -102,35 +102,7 @@ public class DietaData {
 
     }
 
-    public Dieta buscarDieta(Paciente paciente) {
-
-        String sql = "Select fechaInicial, pesoInicial, pesoFinal, idDieta from dieta where paciente=?";
-        Dieta dieta = null;
-
-        PreparedStatement ps;
-
-        try {
-            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, paciente.getIdPaciente());
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                dieta = new Dieta();
-                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
-                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
-                dieta.setPesoFinal(rs.getDouble("pesoFinal"));
-                dieta.setIdDieta(rs.getInt("idDieta"));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Dieta no encontrada");
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
-        }
-        return dieta;
-    }
+    
 
     public Dieta buscarDietaCompleta(Paciente paciente) {
 
@@ -153,7 +125,38 @@ public class DietaData {
                 dieta.setPesoActual(rs.getDouble("pesoActual"));
                 dieta.setFechaActual(rs.getDate("fechaActual").toLocalDate());
                 dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
-                 
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Dieta no encontrada");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla paciente");
+        }
+        return dieta;
+    }
+
+    public Dieta buscarDieta(Paciente paciente) {
+
+        String sql = "Select fechaInicial, pesoInicial, pesoFinal, idDieta, fechaFinal from dieta where paciente=?";
+        Dieta dieta = null;
+
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, paciente.getIdPaciente());
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                dieta = new Dieta();
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoFinal(rs.getDouble("pesoFinal"));
+                dieta.setIdDieta(rs.getInt("idDieta"));
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+
             } else {
                 JOptionPane.showMessageDialog(null, "Dieta no encontrada");
             }

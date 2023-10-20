@@ -336,7 +336,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         try {
             Integer dni = Integer.parseInt(jtDNI.getText());
             paciente = pd.buscarPaciente(dni);
-            dieta = dd.buscarDietaCompleta(paciente);
+            dieta = dd.buscarDieta(paciente);
 
             if (paciente != null) {
                 jtNombre.setText(paciente.getNombre());
