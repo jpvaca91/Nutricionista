@@ -5,10 +5,15 @@
  */
 package nutricionista.Vistas;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
+import javax.swing.JOptionPane;
 import nutricionista.AccesoADatos.DietaData;
+import nutricionista.AccesoADatos.HistorialData;
 import nutricionista.AccesoADatos.PacienteData;
 import nutricionista.Entidades.Dieta;
+import nutricionista.Entidades.Historial;
 import nutricionista.Entidades.Paciente;
 
 /**
@@ -20,21 +25,16 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioSeguimientoPorPaciente
      */
-    
     private List<Paciente> listaP;
     private PacienteData pd;
-    
-    
+
     public FormularioHistorial() {
         initComponents();
         pd = new PacienteData();
         listaP = pd.listarPacientes();
-        
-        
-         cargarComboPaciente();
+
+        cargarComboPaciente();
     }
-    
-    
 
     private void cargarComboPaciente() {
 
@@ -42,6 +42,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             jcbPaciente.addItem(item);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,16 +62,17 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jtPesoInicial = new javax.swing.JTextField();
         jtPesoAct = new javax.swing.JTextField();
         jtPesoObjetivo = new javax.swing.JTextField();
-        jrbDVigente = new javax.swing.JRadioButton();
-        jrbDFinalizada = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        jrbEstado = new javax.swing.JRadioButton();
+        jbGuardar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jtFechaInicial = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jcbPaciente = new javax.swing.JComboBox<>();
         jdcFechaAct = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtPesoAnt = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jtFechaAnt = new javax.swing.JTextField();
 
         jLabel4.setText("jLabel4");
 
@@ -92,16 +94,19 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jtPesoObjetivo.setEditable(false);
         jtPesoObjetivo.setBackground(new java.awt.Color(204, 204, 204));
 
-        jrbDVigente.setText("D.Vigente");
-        jrbDVigente.addActionListener(new java.awt.event.ActionListener() {
+        jrbEstado.setText("Estado");
+        jrbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbDVigenteActionPerformed(evt);
+                jrbEstadoActionPerformed(evt);
             }
         });
 
-        jrbDFinalizada.setText("D.Finalizada");
-
-        jButton2.setText("Guardar ");
+        jbGuardar.setText("Guardar ");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Fecha Inicial");
 
@@ -118,63 +123,67 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Peso Anterior");
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
+        jtPesoAnt.setEditable(false);
+        jtPesoAnt.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel11.setText("Fecha Anterior");
+
+        jtFechaAnt.setEditable(false);
+        jtFechaAnt.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jrbDVigente)
-                            .addComponent(jrbDFinalizada)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel3))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel2)
+                                .addGap(31, 31, 31)
+                                .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jrbEstado))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(23, 23, 23)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(jtPesoAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtFechaAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel11))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jButton2))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jtPesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(155, 155, 155))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtPesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtPesoObjetivo)
+                                            .addComponent(jLabel7)))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbGuardar)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(31, 31, 31)
-                                    .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtPesoObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel1)))
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,70 +191,109 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtPesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtPesoObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                            .addComponent(jtPesoAnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jrbDVigente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jrbDFinalizada)
-                        .addContainerGap(25, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtFechaAnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jrbEstado)
+                            .addComponent(jbGuardar))
+                        .addGap(40, 40, 40))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtPesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtPesoObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(40, 40, 40))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbDVigenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbDVigenteActionPerformed
+    private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jrbDVigenteActionPerformed
+    }//GEN-LAST:event_jrbEstadoActionPerformed
 
     private void jcbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacienteActionPerformed
-        
-        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+
+       Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
         DietaData dd = new DietaData();
         Dieta dieta=new Dieta();
-        dieta=dd.buscarDieta(paciente);
+        dieta=dd.buscarDietaCompleta(paciente);
         jtPesoInicial.setText(dieta.getPesoInicial()+"");
         jtFechaInicial.setText(dieta.getFechaInicial()+"");
         jtPesoObjetivo.setText (dieta.getPesoFinal()+"");
-        
+        jtPesoAnt.setText(dieta.getPesoActual()+"");
+        jtFechaAnt.setText(dieta.getFechaActual()+"");
         
     }//GEN-LAST:event_jcbPacienteActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        double pesoActual = 0;
+        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+        LocalDate fechaActual = jdcFechaAct.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Boolean estado = jrbEstado.isSelected();
+
+        try {
+            pesoActual = Double.parseDouble(jtPesoAct.getText());
+            Historial historial = new Historial();
+            historial.setPaciente(paciente);
+            historial.setFechaRegistro(fechaActual);
+            historial.setEstado(estado);
+            historial.setPeso(pesoActual);
+
+            HistorialData hd = new HistorialData();
+            hd.guardarHistorial(historial);
+
+            Dieta dieta = new Dieta();
+
+            dieta.setPesoActual(Double.parseDouble(jtPesoAct.getText()));
+            dieta.setFechaActual(jdcFechaAct.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            dieta.setPaciente(paciente);
+
+            DietaData dd = new DietaData();
+            dd.actualizarHistorial(dieta);
+            
+            limpiarCampos();
+            
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(null, "Debe introducir un peso correcto");
+        }
+
+
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -254,14 +302,26 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbGuardar;
     private javax.swing.JComboBox<Paciente> jcbPaciente;
     private com.toedter.calendar.JDateChooser jdcFechaAct;
-    private javax.swing.JRadioButton jrbDFinalizada;
-    private javax.swing.JRadioButton jrbDVigente;
+    private javax.swing.JRadioButton jrbEstado;
+    private javax.swing.JTextField jtFechaAnt;
     private javax.swing.JTextField jtFechaInicial;
     private javax.swing.JTextField jtPesoAct;
+    private javax.swing.JTextField jtPesoAnt;
     private javax.swing.JTextField jtPesoInicial;
     private javax.swing.JTextField jtPesoObjetivo;
     // End of variables declaration//GEN-END:variables
+
+public void limpiarCampos(){
+    jtPesoInicial.setText("");
+    jtFechaInicial.setText("");
+    jtPesoAnt.setText("");
+    jtPesoAct.setText("");
+    jtPesoObjetivo.setText("");
+    jtFechaAnt.setText("");
+    jdcFechaAct.setDate(null);
+    
+}
 }

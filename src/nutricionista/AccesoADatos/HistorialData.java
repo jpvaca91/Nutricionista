@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import nutricionista.Entidades.Historial;
 import java.lang.Integer;
+import java.sql.Date;
 import nutricionista.Entidades.Paciente;
 
 
@@ -50,5 +51,27 @@ public class HistorialData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Historial" + ex);
         }
         return horarios;
+    }
+    public void guardarHistorial(Historial historial){
+        
+        String sql ="INSERT INTO historial (paciente, peso, fechaRegistro, estado) VALUES (?, ?, ?, ?)";
+         try {
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+             ps.setInt(1, historial.getPaciente().getIdPaciente());
+             ps.setDouble(2, historial.getPeso() );
+             ps.setDate(3, Date.valueOf(historial.getFechaRegistro()));
+             ps.setBoolean(4, historial.isEstado());
+             
+             ps.executeUpdate();
+             ResultSet rs=ps.getGeneratedKeys();
+              
+             if(rs.next()){
+                 JOptionPane.showMessageDialog(null, "Historial actualizado");
+             }
+             
+             ps.close();
+         } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Historial" + ex);
+         }
     }
 }
