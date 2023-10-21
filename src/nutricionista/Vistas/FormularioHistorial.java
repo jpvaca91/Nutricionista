@@ -258,6 +258,10 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             HistorialData hd = new HistorialData();
             hd.guardarHistorial(historial);
 
+            paciente.setEstado(estado);
+            PacienteData pd =new PacienteData();
+            pd.actualizarEstado(paciente);
+            
             Dieta dieta = new Dieta();
 
             dieta.setPesoActual(Double.parseDouble(jtPesoAct.getText()));
@@ -269,6 +273,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
             limpiarCampos();
             actualizarDatos();
+            cargarComboPaciente();
             
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe introducir un peso correcto");

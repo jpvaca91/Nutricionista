@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -101,8 +103,6 @@ public class DietaData {
         }
 
     }
-
-    
 
     public Dieta buscarDietaCompleta(Paciente paciente) {
 
@@ -251,4 +251,36 @@ public class DietaData {
         return dieta;
     }
 
+    public List<Dieta> listarTodasLasDietas() {
+        ArrayList<Dieta> dieta = new ArrayList<>();
+
+        String sql = "SELECT idDieta, paciente, fechaActual, pesoFinal, pesoActual, fechaFinal,pesoInicial FROM dieta";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta d = new Dieta();
+                Paciente p = new Paciente();
+                PacienteData pd = new PacienteData();
+                p = pd.buscarPacientePorId((rs.getInt("paciente")));
+
+                d.setPaciente(p);
+                d.setIdDieta(rs.getInt("idDieta"));
+                d.setFechaActual(rs.getDate("fechaActual").toLocalDate());
+                d.setPesoFinal(rs.getDouble("pesoFinal"));
+                d.setPesoActual(rs.getDouble("pesoActual"));
+                d.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                d.setPesoInicial(rs.getDouble("pesoInicial"));
+
+                dieta.add(d);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta" + ex);
+        }
+
+        return dieta;
+    }
 }
