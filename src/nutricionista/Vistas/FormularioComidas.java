@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nutricionista.Vistas;
 
 import javax.swing.JOptionPane;
@@ -10,15 +6,10 @@ import nutricionista.AccesoADatos.ComidaData;
 import nutricionista.Entidades.Comida;
 import static nutricionista.Vistas.FormularioPaciente.esNumerico;
 
-/**
- *
- * @author vico_
- */
+
 public class FormularioComidas extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioComidas
-     */
+   
     public FormularioComidas() {
         initComponents();
     }
@@ -47,6 +38,8 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         jtNombre = new javax.swing.JTextField();
         jtDetalle = new javax.swing.JTextField();
         jtCalorias = new javax.swing.JTextField();
+
+        setClosable(true);
 
         jLabel1.setText("COMIDAS");
 
@@ -101,6 +94,7 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         });
 
         jtIdComida.setEditable(false);
+        jtIdComida.setForeground(new java.awt.Color(102, 102, 102));
 
         jtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

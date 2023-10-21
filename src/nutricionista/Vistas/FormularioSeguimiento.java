@@ -41,6 +41,8 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         jtTabla2 = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("SEGUIMIENTO DE DIETAS");
 
@@ -148,6 +150,8 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // Listar dietas activas
         jrbFinalizadas.setSelected(false);
         jrbTodas.setSelected(false);
+        actualizarTablaActivas();
+        
 
     }//GEN-LAST:event_jrbActivasActionPerformed
 
@@ -155,6 +159,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // Listar dietas terminadas
         jrbActivas.setSelected(false);
         jrbTodas.setSelected(false);
+        actualizarTablaInactivas();
     }//GEN-LAST:event_jrbFinalizadasActionPerformed
 
     private void jtTabla2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jtTabla2AncestorAdded
@@ -168,18 +173,19 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jrbActivas.setSelected(false);
         jrbFinalizadas.setSelected(false);
-        actualizarTabla();
+        actualizarTablaCompleta();
 
 
     }//GEN-LAST:event_jrbTodasActionPerformed
-    public void actualizarTabla() {
+   
+    public void actualizarTablaCompleta() {
         borrarTabla();
         DietaData dd = new DietaData();
         listaD = dd.listarTodasLasDietas();
 
         for (Dieta obj : listaD) {
 
-            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(),obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
             modelo.addRow(fila);
 
         }
@@ -187,6 +193,36 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
 
     }
 
+    public void actualizarTablaActivas() {
+        borrarTabla();
+        DietaData dd = new DietaData();
+        listaD = dd.listarDietasActivas();
+
+        for (Dieta obj : listaD) {
+
+            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+            modelo.addRow(fila);
+
+        }
+        jtTabla2.setModel(modelo);
+
+    }
+
+     public void actualizarTablaInactivas() {
+        borrarTabla();
+        DietaData dd = new DietaData();
+        listaD = dd.listarDietasInactivas();
+
+        for (Dieta obj : listaD) {
+
+            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+            modelo.addRow(fila);
+
+        }
+        jtTabla2.setModel(modelo);
+
+    }
+     
     public void borrarTabla() {
 
         int cantfilas = jtTabla2.getRowCount();

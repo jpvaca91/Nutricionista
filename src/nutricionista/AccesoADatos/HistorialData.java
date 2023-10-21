@@ -24,6 +24,7 @@ public class HistorialData {
         con = Coneccion.getConexion();
     
 }
+    
     public List<Historial> listarHorarios() {
 
         String sql = "SELECT idHistorial, paciente, peso, fechaRegistro FROM historial ";
@@ -41,7 +42,6 @@ public class HistorialData {
                 horario.setPeso(rs.getDouble("peso"));
                 horario.setFechaRegistro(rs.getDate("fechaRegistro").toLocalDate());
              
-
                 horarios.add(horario);
 
             }
@@ -52,6 +52,7 @@ public class HistorialData {
         }
         return horarios;
     }
+    
     public void guardarHistorial(Historial historial){
         
         String sql ="INSERT INTO historial (paciente, peso, fechaRegistro, estado) VALUES (?, ?, ?, ?)";

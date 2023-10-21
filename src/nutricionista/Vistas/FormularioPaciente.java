@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nutricionista.Vistas;
 
 import java.time.LocalDate;
@@ -14,15 +10,10 @@ import nutricionista.AccesoADatos.PacienteData;
 import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.Paciente;
 
-/**
- *
- * @author vico_
- */
+
 public class FormularioPaciente extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form MenuPaciente
-     */
+   
     public FormularioPaciente() {
         initComponents();
     }
@@ -61,6 +52,8 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtPesoInicial = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jdFechaFin = new com.toedter.calendar.JDateChooser();
+
+        setClosable(true);
 
         jLabel1.setText("Nombre");
 
@@ -288,8 +281,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
         PacienteData pacientedata = new PacienteData();
 
-        //int idpaciente = (pacientedata.buscarPaciente(dni)).getIdPaciente();
-        //acá guardamos los datos de Dieta del mismo paciente
+        
         try {
 
             Dieta dieta = new Dieta();
@@ -424,6 +416,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbEliminarActionPerformed
     }
+    
     private void jtPesoObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesoObjActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesoObjActionPerformed
@@ -431,7 +424,6 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private void jtPesoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesoInicialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesoInicialActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

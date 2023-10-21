@@ -148,6 +148,7 @@ public class ComidaData {
         return comida;
 
     }
+    
     public List<Comida> comidasAsignadas(int idComida) {
         ArrayList<Comida> comidas = new ArrayList<>();
        

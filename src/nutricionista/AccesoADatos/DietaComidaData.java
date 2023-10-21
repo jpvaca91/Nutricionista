@@ -60,10 +60,6 @@ public class DietaComidaData {
             ps.setInt(1, dieta.getIdDieta());
             ResultSet rs = ps.executeQuery();
 
-           // if (!rs.next()) {
-            //    JOptionPane.showMessageDialog(null, "Paciente sin dieta asignada, listo para cargar");
-         //   }
-
             while (rs.next()) {
                 String hora = rs.getString("horario");
 
@@ -96,41 +92,16 @@ public class DietaComidaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dietaComida.getId());
             ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()){
+
+            if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "eliminado correctamente");
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al eliminar la dietaComida de la BD: "+ex);
+            JOptionPane.showMessageDialog(null, "Error al eliminar la dietaComida de la BD: " + ex);
         }
 
     }
 
-    /* public void GuardarDietaComida(DietaComida dietaComida){
-        
-        String sql="INSERT INTO dietacomida(comida, dieta, horario) VALUES (?,?,?)";
-        
-         try {
-             PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-             ps.setInt(1, dietaComida.getComida().getIdComidas());
-             ps.setInt(2, dietaComida.getDieta().getIdDieta());
-             ps.setString(3, dietaComida.getHorario().toString());
-             
-             ps.executeUpdate();
-             ResultSet rs=ps.getGeneratedKeys();
-             
-             if(rs.next()){
-                 
-                 
-                 JOptionPane.showMessageDialog(null,"Comida asignada correctamente al paciente" );
-             }
-             ps.close();
-             
-         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null ,"Error al acceder a la bd Dietacomida" +ex);
-         }
-         
-    }*/
 }

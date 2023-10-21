@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nutricionista.AccesoADatos;
 
 import java.sql.Connection;
@@ -190,32 +186,6 @@ public class DietaData {
 
     }
 
-    /*  public void guardarDietaComida(DietaComida dietacomida) {
-        String sql = "INSERT INTO dietacomida (horario)"
-                + "VALUES (?) AND comida (nombre,detalle,cantCalorias) VALUES (?,?,?)";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            ps.setString(1, dietacomida.getPaciente().getIdPaciente());
-            ps.setString(2, comida.getNombre());
-            ps.setString(3, comida.getDetalle());
-            ps.setInt(4, comida.getCantCalorias());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                dietacomida.setIdPaciente(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Datos guardados");
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos" + ex);
-        }
-
-    }*/
     public Dieta buscarDietaPorId(int idDieta) {
 
         String sql = "Select paciente, fechaInicial, pesoInicial, pesoFinal, idDieta from dieta where idDieta=?";
@@ -255,6 +225,74 @@ public class DietaData {
         ArrayList<Dieta> dieta = new ArrayList<>();
 
         String sql = "SELECT idDieta, paciente, fechaActual, pesoFinal, pesoActual, fechaFinal,pesoInicial FROM dieta";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta d = new Dieta();
+                Paciente p = new Paciente();
+                PacienteData pd = new PacienteData();
+                p = pd.buscarPacientePorId((rs.getInt("paciente")));
+
+                d.setPaciente(p);
+                d.setIdDieta(rs.getInt("idDieta"));
+                d.setFechaActual(rs.getDate("fechaActual").toLocalDate());
+                d.setPesoFinal(rs.getDouble("pesoFinal"));
+                d.setPesoActual(rs.getDouble("pesoActual"));
+                d.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                d.setPesoInicial(rs.getDouble("pesoInicial"));
+
+                dieta.add(d);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta" + ex);
+        }
+
+        return dieta;
+    }
+    
+     public List<Dieta> listarDietasActivas() {
+        ArrayList<Dieta> dieta = new ArrayList<>();
+
+        String sql = "SELECT idDieta, paciente, fechaActual, pesoFinal, pesoActual, fechaFinal,pesoInicial, idPaciente, estado "
+                + "FROM dieta, paciente WHERE dieta.paciente= paciente.idPaciente AND estado=1";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta d = new Dieta();
+                Paciente p = new Paciente();
+                PacienteData pd = new PacienteData();
+                p = pd.buscarPacientePorId((rs.getInt("paciente")));
+
+                d.setPaciente(p);
+                d.setIdDieta(rs.getInt("idDieta"));
+                d.setFechaActual(rs.getDate("fechaActual").toLocalDate());
+                d.setPesoFinal(rs.getDouble("pesoFinal"));
+                d.setPesoActual(rs.getDouble("pesoActual"));
+                d.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                d.setPesoInicial(rs.getDouble("pesoInicial"));
+
+                dieta.add(d);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta" + ex);
+        }
+
+        return dieta;
+    }
+     
+     public List<Dieta> listarDietasInactivas() {
+        ArrayList<Dieta> dieta = new ArrayList<>();
+
+        String sql = "SELECT idDieta, paciente, fechaActual, pesoFinal, pesoActual, fechaFinal,pesoInicial, idPaciente, estado "
+                + "FROM dieta, paciente WHERE dieta.paciente= paciente.idPaciente AND estado=0";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

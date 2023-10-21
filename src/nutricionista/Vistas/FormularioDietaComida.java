@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nutricionista.Vistas;
 
 import java.awt.Component;
@@ -22,10 +17,6 @@ import nutricionista.Entidades.DietaComida;
 import nutricionista.Entidades.Historial;
 import nutricionista.Entidades.Paciente;
 
-/**
- *
- * @author vico_
- */
 public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     private PacienteData pd;
@@ -50,7 +41,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
         cd = new ComidaData();
         listaC = cd.listarComidas();
-        // ed  = new HorarioEspecificoData();
 
         cargarComboPaciente();
         cargarComboComida();
@@ -97,6 +87,8 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabla = new javax.swing.JTable();
+
+        setClosable(true);
 
         jLabel1.setText("DIETA COMIDA");
 
@@ -159,7 +151,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtTabla.setRowSelectionAllowed(true);
         jScrollPane1.setViewportView(jtTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,7 +233,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jcbPacienteActionPerformed
 
-
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -298,6 +288,7 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jbEliminarActionPerformed
+   
     public void actualizarTabla() {
         borrarTabla();
 
@@ -323,7 +314,6 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
 
         if (cantfilas >= 1) {
             modelo.setNumRows(0);
-            //JOptionPane.showMessageDialog(null, "filas eliminadas");
 
         }
 
@@ -363,14 +353,4 @@ public class FormularioDietaComida extends javax.swing.JInternalFrame {
         }
         jtTabla.setModel(modelo);
     }
-
-   /* private void cargarComidas() {
-        Comida select = (Comida) jcbComidas.getSelectedItem();
-        listaC = cd.comidasAsignadas(select.getIdComidas());
-        for (Materia m : listaM) {
-            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
-        }
-
-    }*/
-
 }

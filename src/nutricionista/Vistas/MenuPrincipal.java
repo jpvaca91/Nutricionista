@@ -1,19 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nutricionista.Vistas;
 
-/**
- *
- * @author vico_
- */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuPrincipal
-     */
     public MenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -39,7 +27,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmSeguimiento = new javax.swing.JMenu();
         jmiPaciente = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,14 +119,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmSeguimiento);
 
-        jmSalir.setText("Salir");
-        jmSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmSalirActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jmSalir);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,7 +141,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPacienteActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jmPacienteActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -177,14 +156,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jmDietaActionPerformed
 
     private void jmComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComidasActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jmComidasActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -199,7 +178,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-         Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         FormularioSeguimiento fs = new FormularioSeguimiento();
         fs.setVisible(true);
@@ -209,7 +188,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmDietaComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaComidaActionPerformed
         // TODO add your handling code here:
-         Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         FormularioDietaComida fdc = new FormularioDietaComida();
         fdc.setVisible(true);
@@ -223,20 +202,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmiPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPacienteActionPerformed
         // TODO add your handling code here:
-           Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         FormularioHistorial fdh = new FormularioHistorial();
         fdh.setVisible(true);
         Escritorio.add(fdh);
         Escritorio.moveToFront(fdh);
     }//GEN-LAST:event_jmiPacienteActionPerformed
-
-    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
-        // TODO add your handling code here:
-        
-        System.exit(0);
-        
-    }//GEN-LAST:event_jmSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,21 +255,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmDieta;
     private javax.swing.JMenuItem jmDietaComida;
     private javax.swing.JMenu jmPaciente;
-    private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmSeguimiento;
     private javax.swing.JMenuItem jmiPaciente;
     // End of variables declaration//GEN-END:variables
 
-
-
-public void IrAEscritorio() {
+    public void IrAEscritorio() {
         Escritorio.removeAll();
         Escritorio.repaint();
     }
-
-
-
-
-
-
 }

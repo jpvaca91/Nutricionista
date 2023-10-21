@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nutricionista.Vistas;
 
 import java.time.LocalDate;
@@ -16,10 +12,6 @@ import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.Historial;
 import nutricionista.Entidades.Paciente;
 
-/**
- *
- * @author vico_
- */
 public class FormularioHistorial extends javax.swing.JInternalFrame {
 
     /**
@@ -281,7 +273,6 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbGuardarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
