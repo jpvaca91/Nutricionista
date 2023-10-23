@@ -230,17 +230,13 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                     if (obj.getPesoActual() >= obj.getPesoFinal()) {
                         Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
                         modelo.addRow(fila);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El paciente " + obj.getPaciente().getNombre() + " no pudo bajar de peso");
-                    }
+                    } 
                     //si no quiere bajar, entonces:
                 } else if (obj.getPesoActual() <= obj.getPesoFinal()) {
                     Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
                     modelo.addRow(fila);
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "El paciente " + obj.getPaciente().getNombre() + " no pudo subir de peso");
-                }
+                } 
             }
             jtTabla2.setModel(modelo);
 
