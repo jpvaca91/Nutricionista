@@ -36,18 +36,22 @@
               <EmptySpace pref="39" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               <Component id="jrbActivas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jrbObjNoAlcanzados" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jrbFinalizadas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jrbTodas" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="jrbObjNoAlcanzados" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -62,10 +66,9 @@
                   <Component id="jrbActivas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jrbFinalizadas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jrbTodas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jrbObjNoAlcanzados" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jrbObjNoAlcanzados" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="222" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
@@ -101,7 +104,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbTodas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Todas las dietas"/>
+        <Property name="text" type="java.lang.String" value="Todas Las Dietas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbTodasActionPerformed"/>
@@ -142,8 +145,11 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbObjNoAlcanzados">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Objetivos no alcanzados"/>
+        <Property name="text" type="java.lang.String" value="Dietas Con Objetivos No Alcanzados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbObjNoAlcanzadosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -2,6 +2,7 @@ package nutricionista.Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import nutricionista.AccesoADatos.ComidaData;
 import nutricionista.AccesoADatos.DietaData;
@@ -61,7 +62,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbTodas.setText("Todas las dietas");
+        jrbTodas.setText("Todas Las Dietas");
         jrbTodas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbTodasActionPerformed(evt);
@@ -98,7 +99,12 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbObjNoAlcanzados.setText("Objetivos no alcanzados");
+        jrbObjNoAlcanzados.setText("Dietas Con Objetivos No Alcanzados");
+        jrbObjNoAlcanzados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbObjNoAlcanzadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,16 +120,19 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
+                .addGap(89, 89, 89)
                 .addComponent(jrbActivas)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrbObjNoAlcanzados)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addComponent(jrbFinalizadas)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jrbTodas)))
+                .addGap(33, 33, 33)
+                .addComponent(jrbObjNoAlcanzados)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,10 +144,9 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbActivas)
                     .addComponent(jrbFinalizadas)
-                    .addComponent(jrbTodas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jrbObjNoAlcanzados)
-                .addGap(11, 11, 11)
+                    .addComponent(jrbTodas)
+                    .addComponent(jrbObjNoAlcanzados))
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSalir)
@@ -157,8 +165,9 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // Listar dietas activas
         jrbFinalizadas.setSelected(false);
         jrbTodas.setSelected(false);
+        jrbObjNoAlcanzados.setSelected(false);
         actualizarTablaActivas();
-        
+
 
     }//GEN-LAST:event_jrbActivasActionPerformed
 
@@ -166,6 +175,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // Listar dietas terminadas
         jrbActivas.setSelected(false);
         jrbTodas.setSelected(false);
+        jrbObjNoAlcanzados.setSelected(false);
         actualizarTablaInactivas();
     }//GEN-LAST:event_jrbFinalizadasActionPerformed
 
@@ -180,11 +190,20 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jrbActivas.setSelected(false);
         jrbFinalizadas.setSelected(false);
+        jrbObjNoAlcanzados.setSelected(false);
         actualizarTablaCompleta();
 
 
     }//GEN-LAST:event_jrbTodasActionPerformed
-   
+
+    private void jrbObjNoAlcanzadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbObjNoAlcanzadosActionPerformed
+        // Listar dietas con objetivos no alcanzados
+        jrbActivas.setSelected(false);
+        jrbTodas.setSelected(false);
+        jrbFinalizadas.setSelected(false);
+        actualizarTablaNoAlcanzadas();
+    }//GEN-LAST:event_jrbObjNoAlcanzadosActionPerformed
+
     public void actualizarTablaCompleta() {
         borrarTabla();
         DietaData dd = new DietaData();
@@ -198,6 +217,34 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         }
         jtTabla2.setModel(modelo);
 
+    }
+
+    public void actualizarTablaNoAlcanzadas() {
+        borrarTabla();
+        DietaData dd = new DietaData();
+        listaD = dd.listarTodasLasDietas();
+        for (Dieta obj : listaD) {
+            if (obj.getFechaFinal().isBefore(obj.getFechaActual())) {
+                //comparar pesos
+                if (obj.getPesoInicial() > obj.getPesoFinal()) { //quiere bajar de peso
+                    if (obj.getPesoActual() >= obj.getPesoFinal()) {
+                        Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+                        modelo.addRow(fila);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El paciente " + obj.getPaciente().getNombre() + " no pudo bajar de peso");
+                    }
+                    //si no quiere bajar, entonces:
+                } else if (obj.getPesoActual() <= obj.getPesoFinal()) {
+                    Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+                    modelo.addRow(fila);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "El paciente " + obj.getPaciente().getNombre() + " no pudo subir de peso");
+                }
+            }
+            jtTabla2.setModel(modelo);
+
+        }
     }
 
     public void actualizarTablaActivas() {
@@ -215,7 +262,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
 
     }
 
-     public void actualizarTablaInactivas() {
+    public void actualizarTablaInactivas() {
         borrarTabla();
         DietaData dd = new DietaData();
         listaD = dd.listarDietasInactivas();
@@ -229,7 +276,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         jtTabla2.setModel(modelo);
 
     }
-     
+
     public void borrarTabla() {
 
         int cantfilas = jtTabla2.getRowCount();
