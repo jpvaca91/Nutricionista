@@ -124,7 +124,7 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
                                 .addComponent(jbLimpiar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbSalir)))
-                        .addContainerGap(13, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)

@@ -40,6 +40,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabla2 = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
+        jrbObjNoAlcanzados = new javax.swing.JRadioButton();
 
         setClosable(true);
 
@@ -80,12 +81,12 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         ));
         jtTabla2.setEnabled(false);
         jtTabla2.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jtTabla2AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jtTabla2);
@@ -97,29 +98,33 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
             }
         });
 
+        jrbObjNoAlcanzados.setText("Objetivos no alcanzados");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jrbActivas)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrbFinalizadas)
-                                .addGap(18, 18, 18)
-                                .addComponent(jrbTodas)))))
-                .addGap(0, 23, Short.MAX_VALUE))
+                        .addGap(306, 306, 306)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(306, 306, 306)
-                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(176, 176, 176)
+                .addComponent(jrbActivas)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jrbObjNoAlcanzados)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jrbFinalizadas)
+                        .addGap(18, 18, 18)
+                        .addComponent(jrbTodas)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,11 +136,13 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
                     .addComponent(jrbActivas)
                     .addComponent(jrbFinalizadas)
                     .addComponent(jrbTodas))
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jrbObjNoAlcanzados)
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSalir)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,6 +247,7 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbActivas;
     private javax.swing.JRadioButton jrbFinalizadas;
+    private javax.swing.JRadioButton jrbObjNoAlcanzados;
     private javax.swing.JRadioButton jrbTodas;
     private javax.swing.JTable jtTabla2;
     // End of variables declaration//GEN-END:variables
