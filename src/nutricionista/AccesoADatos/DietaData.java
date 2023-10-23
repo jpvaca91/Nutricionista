@@ -25,8 +25,8 @@ public class DietaData {
     }
 
     public void guardarDieta(Dieta dieta) {
-        String sql = "INSERT INTO dieta (paciente,fechaInicial,pesoInicial,pesoFinal,fechaFinal)"
-                + "VALUE (?,?,?,?,?)";
+        String sql = "INSERT INTO dieta (paciente,fechaInicial,pesoInicial,pesoFinal,fechaFinal,fechaActual,pesoActual)"
+                + "VALUE (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -36,6 +36,8 @@ public class DietaData {
             ps.setDouble(3, dieta.getPesoInicial());
             ps.setDouble(4, dieta.getPesoFinal());
             ps.setDate(5, Date.valueOf(dieta.getFechaFinal()));
+            ps.setDate(6, Date.valueOf(dieta.getFechaInicial()));
+            ps.setDouble(7, dieta.getPesoInicial());
 
             ps.executeUpdate();
 
