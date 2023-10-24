@@ -342,6 +342,8 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
+        }catch(NullPointerException np){
+            JOptionPane.showMessageDialog(null, "Este paciente no tiene dieta iniciada");
         }
 
 

@@ -1,4 +1,3 @@
-
 package nutricionista.Vistas;
 
 import javax.swing.JOptionPane;
@@ -6,10 +5,8 @@ import nutricionista.AccesoADatos.ComidaData;
 import nutricionista.Entidades.Comida;
 import static nutricionista.Vistas.FormularioPaciente.esNumerico;
 
-
 public class FormularioComidas extends javax.swing.JInternalFrame {
 
-   
     public FormularioComidas() {
         initComponents();
     }
@@ -94,6 +91,7 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         });
 
         jtIdComida.setEditable(false);
+        jtIdComida.setBackground(new java.awt.Color(204, 204, 204));
         jtIdComida.setForeground(new java.awt.Color(102, 102, 102));
 
         jtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -190,20 +188,23 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 //configuracion del boton "GUARDAR"
-
+  try {
         Comida comida = new Comida();
         ComidaData cd = new ComidaData();
 
         String nombre = jtNombre.getText();
         String detalle = jtDetalle.getText();
-        int calorias = Integer.parseInt(jtCalorias.getText());
+      
+            int calorias = Integer.parseInt(jtCalorias.getText());
 
-        comida.setNombre(nombre);
-        comida.setDetalle(detalle);
-        comida.setCantCalorias(calorias);
-
-        cd.guardarComida(comida);
-        limpiarCampos();
+            comida.setNombre(nombre);
+            comida.setDetalle(detalle);
+            comida.setCantCalorias(calorias);
+            cd.guardarComida(comida);
+            limpiarCampos();
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar numeros enteros en calorias");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
@@ -226,16 +227,16 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         String nombre = jtNombre.getText();
         Comida comida = new Comida();
         comida = cd.buscarComida(nombre);
-        
+
         jtIdComida.setText(comida.getIdComidas() + "");
         jtDetalle.setText(comida.getDetalle() + "");
-        jtCalorias.setText(comida.getCantCalorias() +"");
+        jtCalorias.setText(comida.getCantCalorias() + "");
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // TODO add your handling code here:
-         String calorias;
+        String calorias;
 
         calorias = jtCalorias.getText();
         if (esNumerico(calorias)) {
@@ -261,28 +262,27 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         }
 
 
-            
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // Configuración del boton "ELIMINAR"
-         String botones[] = {"SI", "NO"};
-            int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR esta comida?", "ALERTA!", 0, 0, null, botones, this);
+        String botones[] = {"SI", "NO"};
+        int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR esta comida?", "ALERTA!", 0, 0, null, botones, this);
 
-            if (eleccion == JOptionPane.YES_OPTION) {
-            
-                int idComida = Integer.parseInt(jtIdComida.getText());
-                
-                ComidaData cd = new ComidaData();
-                
-                cd.eliminarComida(idComida);
-                
-                limpiarCampos();
-            
-            }else {
-                JOptionPane.showMessageDialog(null, "Comida no eliminada");
-            }
-        
+        if (eleccion == JOptionPane.YES_OPTION) {
+
+            int idComida = Integer.parseInt(jtIdComida.getText());
+
+            ComidaData cd = new ComidaData();
+
+            cd.eliminarComida(idComida);
+
+            limpiarCampos();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Comida no eliminada");
+        }
+
     }//GEN-LAST:event_jbEliminarActionPerformed
 
 
@@ -304,17 +304,12 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
- public void limpiarCampos() {
+    public void limpiarCampos() {
         jtNombre.setText("");
         jtIdComida.setText("");
         jtDetalle.setText("");
         jtCalorias.setText("");
-        
-        
+
     }
-
-
-
-
 
 }

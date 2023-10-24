@@ -149,7 +149,7 @@ public class FormularioCalorias extends javax.swing.JInternalFrame {
     }
     
     private void actualizarTabla() {
-       //  borrarTabla();
+         borrarTabla();
         try{
           
         ComidaData cd = new ComidaData();
@@ -162,11 +162,11 @@ public class FormularioCalorias extends javax.swing.JInternalFrame {
                 Object[] fila = new Object[]{obj.getNombre(), obj.getDetalle(), obj.getCantCalorias()};
                 modelo.addRow(fila);
             }
-        }
+        }jtCalorias.setModel(modelo);
         }catch(NumberFormatException nf){
          JOptionPane.showMessageDialog(null, "Debe ingresar números enteros"); 
                 }
-        jtCalorias.setModel(modelo);
+        
        
     }
     public void borrarTabla() {

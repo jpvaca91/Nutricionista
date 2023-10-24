@@ -67,7 +67,7 @@ public class HistorialData {
              ResultSet rs=ps.getGeneratedKeys();
               
              if(rs.next()){
-                 JOptionPane.showMessageDialog(null, "Historial actualizado");
+               //  JOptionPane.showMessageDialog(null, "Historial actualizado");
              }
              
              ps.close();

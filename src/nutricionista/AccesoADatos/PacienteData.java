@@ -111,7 +111,7 @@ public class PacienteData {
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Paciente actualizado");
+               // JOptionPane.showMessageDialog(null, "Paciente actualizado");
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el paciente");
@@ -135,7 +135,7 @@ public class PacienteData {
             int exito = ps.executeUpdate();
             if (exito == 1) {
 
-                JOptionPane.showMessageDialog(null, "Paciente eliminado");
+                JOptionPane.showMessageDialog(null, "Paciente pasó a inactivo");
 
             } else {
                 JOptionPane.showMessageDialog(null, "Paciente no encontrado o ya tiene asignada una Dieta");

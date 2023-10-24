@@ -155,8 +155,6 @@ public class DietaData {
                 dieta.setIdDieta(rs.getInt("idDieta"));
                 dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
 
-            } else {
-                JOptionPane.showMessageDialog(null, "Dieta no encontrada");
             }
             ps.close();
 

@@ -22,14 +22,14 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
     public FormularioHistorial() {
         initComponents();
-        pd = new PacienteData();
-        listaP = pd.listarPacientes();
+       
 
         cargarComboPaciente();
     }
 
     private void cargarComboPaciente() {
-
+        pd = new PacienteData();
+        listaP = pd.listarPacientes();
         for (Paciente item : listaP) {
             jcbPaciente.addItem(item);
         }
@@ -131,24 +131,18 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(jrbEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jtFechaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jtPesoInicial))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtFechaAnt, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jtPesoAnt))
-                                .addGap(30, 30, 30)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9)
+                            .addComponent(jtFechaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(jtPesoInicial))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtFechaAnt, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel3)
+                            .addComponent(jtPesoAnt))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +153,6 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                                     .addComponent(jtPesoObjetivo)
                                     .addComponent(jLabel7)))
                             .addComponent(jLabel10)
-                            .addComponent(jbGuardar)
                             .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
@@ -170,6 +163,12 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                         .addGap(138, 138, 138)
                         .addComponent(jLabel1)))
                 .addGap(43, 43, 43))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jrbEstado)
+                    .addComponent(jbGuardar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,13 +182,13 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                 .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtPesoAnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtPesoAnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
@@ -213,10 +212,11 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addGap(1, 1, 1)
                         .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jrbEstado)
-                    .addComponent(jbGuardar)))
+                .addGap(18, 18, 18)
+                .addComponent(jrbEstado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jbGuardar)
+                .addContainerGap())
         );
 
         pack();
@@ -236,10 +236,23 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         double pesoActual = 0;
         Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
-        LocalDate fechaActual = jdcFechaAct.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Boolean estado = jrbEstado.isSelected();
-
         try {
+        LocalDate fechaActual = jdcFechaAct.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Boolean estado=true;
+        if(jrbEstado.isSelected()){
+            estado=true; 
+        }else{ 
+             String botones[] = {"SI", "NO"};
+            int eleccion = JOptionPane.showOptionDialog(this, "Seguro desea dar por FINALIZADA la dieta de este paciente? ", "ALERTA!", 0, 0, null, botones, this);
+
+            if (eleccion == JOptionPane.YES_OPTION) {
+                estado=false;
+            }else{
+                JOptionPane.showMessageDialog(null, "Se cancelan las modificaciones");
+                return;
+            }
+        }
+        
             pesoActual = Double.parseDouble(jtPesoAct.getText());
             Historial historial = new Historial();
             historial.setPaciente(paciente);
@@ -269,6 +282,8 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe introducir un peso correcto");
+        }catch(NullPointerException np){
+            JOptionPane.showMessageDialog(null, "No debe haber campos vacios");
         }
 
 
