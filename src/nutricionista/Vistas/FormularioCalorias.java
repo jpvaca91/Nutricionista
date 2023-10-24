@@ -2,6 +2,7 @@ package nutricionista.Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import nutricionista.AccesoADatos.ComidaData;
 import nutricionista.Entidades.Comida;
@@ -148,7 +149,11 @@ public class FormularioCalorias extends javax.swing.JInternalFrame {
     }
     
     private void actualizarTabla() {
+       //  borrarTabla();
+        try{
+          
         ComidaData cd = new ComidaData();
+        
         listaC = cd.listarComidas();
         int min = Integer.parseInt(jtfMinimo.getText());
         int max = Integer.parseInt(jtfMaximo.getText());
@@ -158,8 +163,20 @@ public class FormularioCalorias extends javax.swing.JInternalFrame {
                 modelo.addRow(fila);
             }
         }
+        }catch(NumberFormatException nf){
+         JOptionPane.showMessageDialog(null, "Debe ingresar números enteros"); 
+                }
         jtCalorias.setModel(modelo);
+       
     }
-     
+    public void borrarTabla() {
+
+        int cantfilas = jtCalorias.getRowCount();
+
+        if (cantfilas >= 1) {
+            modelo.setNumRows(0);
+
+        }
+    }
 }
 
