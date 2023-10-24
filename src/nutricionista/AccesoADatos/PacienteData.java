@@ -1,4 +1,3 @@
-
 package nutricionista.AccesoADatos;
 
 import java.sql.Connection;
@@ -48,6 +47,31 @@ public class PacienteData {
 
     }
 
+/*    public void guardarPacienteSinDni(Paciente paciente) {
+        String sql = "INSERT INTO paciente (nombre,domicilio,telefono,estado)"
+                + "VALUE (?,?,?,?)";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, paciente.getNombre());
+            ps.setString(2, paciente.getDomicilio());
+            ps.setString(3, paciente.getTelefono());
+            ps.setBoolean(4, paciente.isEstado());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                paciente.setIdPaciente(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Paciente actualizado");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar a la Base de Datos" + ex);
+        }
+
+    }*/
+
     public void actualizarPaciente(Paciente paciente) {
         String sql = "UPDATE paciente SET nombre=?, dni=?, domicilio=?, telefono=?, estado=?"
                 + " WHERE DNI=?";
@@ -64,6 +88,7 @@ public class PacienteData {
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Paciente actualizado");
+              //  guardarPacienteSinDni(paciente);
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el paciente");
@@ -76,15 +101,15 @@ public class PacienteData {
         }
     }
 
-    public void actualizarEstado(Paciente paciente){
-         String sql = "UPDATE paciente SET estado=? WHERE DNI=?";
+    public void actualizarEstado(Paciente paciente) {
+        String sql = "UPDATE paciente SET estado=? WHERE DNI=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setBoolean(1, paciente.getEstado());
             ps.setInt(2, paciente.getDni());
-            
-              int exito = ps.executeUpdate();
+
+            int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Paciente actualizado");
 
@@ -98,7 +123,7 @@ public class PacienteData {
 
         }
     }
-    
+
     public void eliminarPaciente(int dni) {
         String sql = "UPDATE paciente SET estado=0 WHERE dni =? AND dni not in (SELECT idDieta FROM dieta WHERE paciente=?);";
 

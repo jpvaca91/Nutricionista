@@ -1,4 +1,3 @@
-
 package nutricionista.Vistas;
 
 import java.time.LocalDate;
@@ -10,10 +9,8 @@ import nutricionista.AccesoADatos.PacienteData;
 import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.Paciente;
 
-
 public class FormularioPaciente extends javax.swing.JInternalFrame {
 
-   
     public FormularioPaciente() {
         initComponents();
     }
@@ -66,6 +63,12 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtDNIActionPerformed(evt);
+            }
+        });
+
+        jtCelular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCelularActionPerformed(evt);
             }
         });
 
@@ -258,31 +261,21 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Boolean estado = false;
 
-        String doc;
-
-        doc = jtDNI.getText();
-        if (esNumerico(doc)) {
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingresar un numero de documento valido");
-        }
-
-        int dni = Integer.parseInt(jtDNI.getText());
-        String nombre = jtNombre.getText();
-        String domicilio = jtDomicilio.getText();
-        String celular = jtCelular.getText();
-
-        if (jrbEstado.isSelected()) {
-            estado = true;
-        }
-
-        Paciente paci = new Paciente(dni, nombre, domicilio, celular, estado);
-        // JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
-
-        PacienteData pacientedata = new PacienteData();
-
-        
         try {
+
+            int dni = Integer.parseInt(jtDNI.getText());
+            String nombre = jtNombre.getText();
+            String domicilio = jtDomicilio.getText();
+            String celular = jtCelular.getText();
+
+            if (jrbEstado.isSelected()) {
+                estado = true;
+            }
+
+            Paciente paci = new Paciente(dni, nombre, domicilio, celular, estado);
+            // JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
+
+            PacienteData pacientedata = new PacienteData();
 
             Dieta dieta = new Dieta();
 
@@ -295,11 +288,10 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             dieta.setPaciente(paci);
             DietaData dd = new DietaData();
             dd.guardarDieta(dieta);
-
+            limpiarCampos();
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(null, "Debe introducir pesos correctos");
+            JOptionPane.showMessageDialog(null, "Error en los campos numéricos");
         }
-        limpiarCampos();
 
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -338,12 +330,12 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                 jtPesoInicial.setText(dieta.getPesoInicial() + "");
                 jtPesoObj.setText(dieta.getPesoFinal() + "");
                 LocalDate lci = dieta.getFechaInicial();
-                LocalDate lcf= dieta.getFechaFinal();
+                LocalDate lcf = dieta.getFechaFinal();
                 Date dateF = Date.from(lcf.atStartOfDay(ZoneId.systemDefault()).toInstant());
-               
+
                 Date dateI = Date.from(lci.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jdFechaInicial.setDate(dateI);
-                
+
                 jdFechaFin.setDate(dateF);
 
             }
@@ -357,31 +349,35 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
     private void jtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtModificarActionPerformed
         //Configuración del botón "MODIFICAR"
-        Paciente paciente = new Paciente();
-        paciente.setDni(Integer.parseInt(jtDNI.getText()));
-        paciente.setDomicilio(jtDomicilio.getText());
-        paciente.setEstado(jrbEstado.isSelected());
-        paciente.setNombre(jtNombre.getText());
-        paciente.setTelefono(jtCelular.getText());
+        try {
 
-        PacienteData pd = new PacienteData();
-        int dni = paciente.getDni();
-        paciente = pd.buscarPaciente(dni);
+            Paciente paciente = new Paciente();
+            paciente.setDni(Integer.parseInt(jtDNI.getText()));
+            paciente.setDomicilio(jtDomicilio.getText());
+            paciente.setEstado(jrbEstado.isSelected());
+            paciente.setNombre(jtNombre.getText());
+            paciente.setTelefono(jtCelular.getText());
 
-        Dieta dieta = new Dieta();
+            PacienteData pd = new PacienteData();
+            pd.actualizarPaciente(paciente);
 
-        dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
-        dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
-        dieta.setPaciente(paciente);
-        dieta.setFechaFinal(jdFechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            int dni = paciente.getDni();
+            paciente = pd.buscarPaciente(dni);
 
-        DietaData dd = new DietaData();
+            Dieta dieta = new Dieta();
+            dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
+            dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
+            dieta.setPaciente(paciente);
+            dieta.setFechaFinal(jdFechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
-        dd.actualizarDieta(dieta);
-        pd.actualizarPaciente(paciente);
+            DietaData dd = new DietaData();
+            dd.actualizarDieta(dieta);
 
-        limpiarCampos();
+            limpiarCampos();
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(null, "Debe introducir caracteres correctos" + nf);
+        }
     }//GEN-LAST:event_jtModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -416,7 +412,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbEliminarActionPerformed
     }
-    
+
     private void jtPesoObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesoObjActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesoObjActionPerformed
@@ -424,6 +420,10 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private void jtPesoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesoInicialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesoInicialActionPerformed
+
+    private void jtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCelularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCelularActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
