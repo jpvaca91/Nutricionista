@@ -24,6 +24,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmDietaComida = new javax.swing.JMenuItem();
         jmComidas = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jmCalorias = new javax.swing.JMenuItem();
         jmSeguimiento = new javax.swing.JMenu();
         jmiPaciente = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -91,6 +92,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jmComidas.add(jMenuItem11);
+
+        jmCalorias.setText("Filtrar comida por calorias");
+        jmCalorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCaloriasActionPerformed(evt);
+            }
+        });
+        jmComidas.add(jmCalorias);
 
         jMenuBar1.add(jmComidas);
 
@@ -210,6 +219,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.moveToFront(fdh);
     }//GEN-LAST:event_jmiPacienteActionPerformed
 
+    private void jmCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCaloriasActionPerformed
+        // filtrar comidas
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioCalorias fc = new FormularioCalorias();
+        fc.setVisible(true);
+        Escritorio.add(fc);
+        Escritorio.moveToFront(fc);
+    }//GEN-LAST:event_jmCaloriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -251,6 +270,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jmCalorias;
     private javax.swing.JMenu jmComidas;
     private javax.swing.JMenu jmDieta;
     private javax.swing.JMenuItem jmDietaComida;
