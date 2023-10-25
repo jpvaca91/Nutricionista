@@ -223,6 +223,7 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
+     try{
         ComidaData cd = new ComidaData();
         String nombre = jtNombre.getText();
         Comida comida = new Comida();
@@ -231,7 +232,9 @@ public class FormularioComidas extends javax.swing.JInternalFrame {
         jtIdComida.setText(comida.getIdComidas() + "");
         jtDetalle.setText(comida.getDetalle() + "");
         jtCalorias.setText(comida.getCantCalorias() + "");
-
+     }catch(NullPointerException np){
+         JOptionPane.showMessageDialog(null, "No existe la comida buscada");
+     }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed

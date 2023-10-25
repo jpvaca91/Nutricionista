@@ -136,9 +136,9 @@ public class ComidaData {
                 comida.setDetalle(rs.getString("detalle"));
                 comida.setCantCalorias(rs.getInt("cantCalorias"));
 
-            } else {
+            } /*else {
                 JOptionPane.showMessageDialog(null, "Comida no encontrada");
-            }
+            */
             ps.close();
 
         } catch (SQLException ex) {
