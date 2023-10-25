@@ -1,10 +1,11 @@
-
 package nutricionista.Vistas;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import nutricionista.AccesoADatos.DietaData;
 import nutricionista.AccesoADatos.HistorialData;
 import nutricionista.AccesoADatos.PacienteData;
@@ -14,17 +15,17 @@ import nutricionista.Entidades.Paciente;
 
 public class FormularioHistorial extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioSeguimientoPorPaciente
-     */
     private List<Paciente> listaP;
     private PacienteData pd;
+    private DefaultTableModel modelo;
+    private List<Historial> listaH;
 
     public FormularioHistorial() {
         initComponents();
-       
-
         cargarComboPaciente();
+        modelo = new DefaultTableModel();
+        armarCabecera();
+
     }
 
     private void cargarComboPaciente() {
@@ -54,7 +55,6 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jtPesoInicial = new javax.swing.JTextField();
         jtPesoAct = new javax.swing.JTextField();
         jtPesoObjetivo = new javax.swing.JTextField();
-        jrbEstado = new javax.swing.JRadioButton();
         jbGuardar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jtFechaInicial = new javax.swing.JTextField();
@@ -65,6 +65,9 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jtPesoAnt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jtFechaAnt = new javax.swing.JTextField();
+        jrbEstado = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtHistorial = new javax.swing.JTable();
 
         jLabel4.setText("jLabel4");
 
@@ -85,13 +88,6 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
         jtPesoObjetivo.setEditable(false);
         jtPesoObjetivo.setBackground(new java.awt.Color(204, 204, 204));
-
-        jrbEstado.setText("Estado");
-        jrbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbEstadoActionPerformed(evt);
-            }
-        });
 
         jbGuardar.setText("Guardar ");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,25 +119,40 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jtFechaAnt.setEditable(false);
         jtFechaAnt.setBackground(new java.awt.Color(204, 204, 204));
 
+        jrbEstado.setText("Dieta Activa");
+
+        jtHistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtHistorial);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel9)
-                            .addComponent(jtFechaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                            .addComponent(jtFechaInicial)
                             .addComponent(jLabel5)
-                            .addComponent(jtPesoInicial))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                            .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtFechaAnt, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jtFechaAnt)
                             .addComponent(jLabel11)
                             .addComponent(jLabel3)
-                            .addComponent(jtPesoAnt))
+                            .addComponent(jtPesoAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -155,20 +166,27 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10)
                             .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel2)
-                        .addGap(31, 31, 31)
-                        .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel1)))
-                .addGap(43, 43, 43))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel2)
+                                .addGap(31, 31, 31)
+                                .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(187, 187, 187)
+                .addGap(229, 229, 229)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jrbEstado)
-                    .addComponent(jbGuardar))
+                    .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +197,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,23 +231,22 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                         .addGap(1, 1, 1)
                         .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jrbEstado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbGuardar)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbEstadoActionPerformed
-
     private void jcbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacienteActionPerformed
 
         limpiarCampos();
         actualizarDatos();
+        actualizarTabla();
     }//GEN-LAST:event_jcbPacienteActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -237,22 +254,22 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         double pesoActual = 0;
         Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
         try {
-        LocalDate fechaActual = jdcFechaAct.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Boolean estado=true;
-        if(jrbEstado.isSelected()){
-            estado=true; 
-        }else{ 
-             String botones[] = {"SI", "NO"};
-            int eleccion = JOptionPane.showOptionDialog(this, "Seguro desea dar por FINALIZADA la dieta de este paciente? ", "ALERTA!", 0, 0, null, botones, this);
+            LocalDate fechaActual = jdcFechaAct.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Boolean estado = true;
+            if (jrbEstado.isSelected()) {
+                estado = true;
+            } else {
+                String botones[] = {"SI", "NO"};
+                int eleccion = JOptionPane.showOptionDialog(this, "Seguro desea dar por FINALIZADA la dieta de este paciente? ", "ALERTA!", 0, 0, null, botones, this);
 
-            if (eleccion == JOptionPane.YES_OPTION) {
-                estado=false;
-            }else{
-                JOptionPane.showMessageDialog(null, "Se cancelan las modificaciones");
-                return;
+                if (eleccion == JOptionPane.YES_OPTION) {
+                    estado = false;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Se cancelan las modificaciones");
+                    return;
+                }
             }
-        }
-        
+
             pesoActual = Double.parseDouble(jtPesoAct.getText());
             Historial historial = new Historial();
             historial.setPaciente(paciente);
@@ -264,9 +281,9 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             hd.guardarHistorial(historial);
 
             paciente.setEstado(estado);
-            PacienteData pd =new PacienteData();
+            PacienteData pd = new PacienteData();
             pd.actualizarEstado(paciente);
-            
+
             Dieta dieta = new Dieta();
 
             dieta.setPesoActual(Double.parseDouble(jtPesoAct.getText()));
@@ -279,10 +296,11 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             limpiarCampos();
             actualizarDatos();
             cargarComboPaciente();
-            
+            //actualizarTabla();
+
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe introducir un peso correcto");
-        }catch(NullPointerException np){
+        } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(null, "No debe haber campos vacios");
         }
 
@@ -300,13 +318,15 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JComboBox<Paciente> jcbPaciente;
     private com.toedter.calendar.JDateChooser jdcFechaAct;
-    private javax.swing.JRadioButton jrbEstado;
+    private javax.swing.JCheckBox jrbEstado;
     private javax.swing.JTextField jtFechaAnt;
     private javax.swing.JTextField jtFechaInicial;
+    private javax.swing.JTable jtHistorial;
     private javax.swing.JTextField jtPesoAct;
     private javax.swing.JTextField jtPesoAnt;
     private javax.swing.JTextField jtPesoInicial;
@@ -323,9 +343,10 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         jdcFechaAct.setDate(null);
 
     }
-    
-    public void actualizarDatos(){
-         Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
+
+    public void actualizarDatos() {
+
+        Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
         DietaData dd = new DietaData();
         Dieta dieta = new Dieta();
         Dieta dieta2 = new Dieta();
@@ -338,14 +359,58 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             jtPesoObjetivo.setText(dieta.getPesoFinal() + "");
             jtPesoAnt.setText(dieta.getPesoActual() + "");
             jtFechaAnt.setText(dieta.getFechaActual() + "");
-            
+
         } catch (NullPointerException np) {
             dieta2 = dd.buscarDieta(paciente);
             jtPesoInicial.setText(dieta2.getPesoInicial() + "");
             jtFechaInicial.setText(dieta2.getFechaInicial() + "");
             jtPesoObjetivo.setText(dieta2.getPesoFinal() + "");
             JOptionPane.showMessageDialog(null, "Es el primer control del paciente seleccionado");
-            
+
         }
+    }
+
+    public void actualizarTabla() {
+
+        //borrarTabla();
+        HistorialData hd = new HistorialData();
+
+        try {
+            listaH = hd.buscarHistorial((Paciente) jcbPaciente.getSelectedItem());
+
+            for (Historial it : listaH) {
+                Object[] fila = new Object[]{it.getPeso(), it.getFechaRegistro()};
+                modelo.addRow(fila);
+
+            }
+            jtHistorial.setModel(modelo);
+
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(null, "Este paciente no tiene datos historicos");
+        }
+
+    }
+
+    public void borrarTabla() {
+
+        int cantfilas = jtHistorial.getRowCount();
+
+        if (cantfilas >= 1) {
+            modelo.setNumRows(0);
+            jtHistorial.setModel(modelo);
+        }
+
+    }
+
+    private void armarCabecera() {
+
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("Historial de peso");
+        filaCabecera.add("Fecha");
+
+        for (Object it : filaCabecera) {
+            modelo.addColumn(it);
+        }
+        jtHistorial.setModel(modelo);
     }
 }
