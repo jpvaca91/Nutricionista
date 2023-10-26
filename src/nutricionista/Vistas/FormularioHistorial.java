@@ -23,26 +23,20 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
     public FormularioHistorial() {
         initComponents();
-        pd = new PacienteData();
-        listaP = pd.listarPacientes();
 
-        modelo = new DefaultTableModel();/* {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-         */
+        modelo = new DefaultTableModel();
+
         cargarComboPaciente();
         armarCabecera();
-        borrarTabla();
+
         actualizarTabla();
 
     }
 
     private void cargarComboPaciente() {
-        // pd = new PacienteData();
-        // listaP = pd.listarPacientes();
+        pd = new PacienteData();
+        listaP = pd.listarPacientes();
+
         for (Paciente item : listaP) {
             jcbPaciente.addItem(item);
         }
@@ -255,7 +249,6 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
         limpiarCampos();
         actualizarDatos();
-        borrarTabla();
         actualizarTabla();
 
     }//GEN-LAST:event_jcbPacienteActionPerformed
@@ -304,9 +297,10 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             DietaData dd = new DietaData();
             dd.actualizarHistorial(dieta);
 
+            //cargarComboPaciente();
             limpiarCampos();
             actualizarDatos();
-            cargarComboPaciente();
+
             actualizarTabla();
 
         } catch (NumberFormatException nf) {
