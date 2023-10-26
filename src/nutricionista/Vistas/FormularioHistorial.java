@@ -22,15 +22,26 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
     public FormularioHistorial() {
         initComponents();
+        pd = new PacienteData();
+        listaP = pd.listarPacientes();
+
+        modelo = new DefaultTableModel();/* {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+         */
         cargarComboPaciente();
-        modelo = new DefaultTableModel();
         armarCabecera();
+        borrarTabla();
+        actualizarTabla();
 
     }
 
     private void cargarComboPaciente() {
-        pd = new PacienteData();
-        listaP = pd.listarPacientes();
+        // pd = new PacienteData();
+        // listaP = pd.listarPacientes();
         for (Paciente item : listaP) {
             jcbPaciente.addItem(item);
         }
@@ -123,13 +134,10 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
         jtHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2"
             }
         ));
         jScrollPane1.setViewportView(jtHistorial);
@@ -166,27 +174,27 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10)
                             .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel2)
-                                .addGap(31, 31, 31)
-                                .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(jLabel1)))
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel2)
+                        .addGap(31, 31, 31)
+                        .addComponent(jcbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(229, 229, 229)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrbEstado)
-                    .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrbEstado)
+                            .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +240,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
                         .addComponent(jdcFechaAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jrbEstado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbGuardar)
@@ -246,7 +254,9 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
         limpiarCampos();
         actualizarDatos();
+        borrarTabla();
         actualizarTabla();
+
     }//GEN-LAST:event_jcbPacienteActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -296,7 +306,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             limpiarCampos();
             actualizarDatos();
             cargarComboPaciente();
-            //actualizarTabla();
+            actualizarTabla();
 
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe introducir un peso correcto");
@@ -372,11 +382,10 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
 
     public void actualizarTabla() {
 
-        //borrarTabla();
+        borrarTabla();
         HistorialData hd = new HistorialData();
-
+        listaH = hd.buscarHistorial((Paciente) jcbPaciente.getSelectedItem());
         try {
-            listaH = hd.buscarHistorial((Paciente) jcbPaciente.getSelectedItem());
 
             for (Historial it : listaH) {
                 Object[] fila = new Object[]{it.getPeso(), it.getFechaRegistro()};
