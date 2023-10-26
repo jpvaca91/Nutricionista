@@ -76,6 +76,25 @@ public class HistorialData {
         }
     }
 
+    public void eliminarHistorial(Historial historial) {
+
+        String sql = "DELETE FROM historial WHERE idHistorial=?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, historial.getIdHistorial());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "eliminado correctamente");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el Historial de la BD: " + ex);
+        }
+    }
+
     public List<Historial> buscarHistorial(Paciente paciente) {
         ArrayList<Historial> listaH = new ArrayList<>();
 
