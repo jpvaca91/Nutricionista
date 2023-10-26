@@ -309,7 +309,7 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             DietaData dd = new DietaData();
             dd.actualizarHistorial(dieta);
 
-            //cargarComboPaciente();
+           
             limpiarCampos();
             actualizarDatos();
 
@@ -342,27 +342,6 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
             actualizarDatos();
             actualizarTabla();
         }
-        /*
-        String botones[] = {"SI", "NO"};
-        int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR esta Comida al Paciente?", "ALERTA!", 0, 0, null, botones, this);
-
-        if (eleccion == JOptionPane.YES_OPTION) {
-            Paciente paciente = (Paciente) jcbPaciente.getSelectedItem();
-            DietaData dd = new DietaData();
-            Dieta dieta = dd.buscarDieta(paciente);
-
-            DietaComidaData dcd = new DietaComidaData();
-
-            List<DietaComida> ldc = dcd.consultaPorPaciente(dieta);
-
-            DietaComida dc = ldc.get(filaS);
-
-            dcd.eliminarDietaComida(dc);
-            actualizarTabla();
-
-        }
-         */
-
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
