@@ -1,5 +1,6 @@
 package nutricionista.Vistas;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -208,10 +209,10 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         borrarTabla();
         DietaData dd = new DietaData();
         listaD = dd.listarTodasLasDietas();
-
+DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for (Dieta obj : listaD) {
 
-            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual().format(nuevoFormato), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal().format(nuevoFormato)};
             modelo.addRow(fila);
 
         }
@@ -223,17 +224,18 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         borrarTabla();
         DietaData dd = new DietaData();
         listaD = dd.listarTodasLasDietas();
+        DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for (Dieta obj : listaD) {
             if (obj.getFechaFinal().isBefore(obj.getFechaActual())) {
                 //comparar pesos
                 if (obj.getPesoInicial() > obj.getPesoFinal()) { //quiere bajar de peso
                     if (obj.getPesoActual() >= obj.getPesoFinal()) {
-                        Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+                        Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual().format(nuevoFormato), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal().format(nuevoFormato)};
                         modelo.addRow(fila);
                     } 
                     //si no quiere bajar, entonces:
                 } else if (obj.getPesoActual() <= obj.getPesoFinal()) {
-                    Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+                    Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual().format(nuevoFormato), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal().format(nuevoFormato)};
                     modelo.addRow(fila);
 
                 } 
@@ -247,10 +249,11 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         borrarTabla();
         DietaData dd = new DietaData();
         listaD = dd.listarDietasActivas();
+         DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         for (Dieta obj : listaD) {
 
-            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual().format(nuevoFormato), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal().format(nuevoFormato)};
             modelo.addRow(fila);
 
         }
@@ -262,10 +265,10 @@ public class FormularioSeguimiento extends javax.swing.JInternalFrame {
         borrarTabla();
         DietaData dd = new DietaData();
         listaD = dd.listarDietasInactivas();
-
+ DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for (Dieta obj : listaD) {
 
-            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual(), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal()};
+            Object[] fila = new Object[]{obj.getPaciente().getNombre(), obj.getFechaActual().format(nuevoFormato), obj.getPesoInicial(), obj.getPesoFinal(), obj.getPesoActual(), obj.getFechaFinal().format(nuevoFormato)};
             modelo.addRow(fila);
 
         }

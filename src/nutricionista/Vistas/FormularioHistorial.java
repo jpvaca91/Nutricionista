@@ -2,6 +2,7 @@ package nutricionista.Vistas;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -361,19 +362,20 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         Dieta dieta = new Dieta();
         Dieta dieta2 = new Dieta();
         limpiarCampos();
+        DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
 
             dieta = dd.buscarDietaCompleta(paciente);
             jtPesoInicial.setText(dieta.getPesoInicial() + "");
-            jtFechaInicial.setText(dieta.getFechaInicial() + "");
+            jtFechaInicial.setText(dieta.getFechaInicial().format(nuevoFormato));
             jtPesoObjetivo.setText(dieta.getPesoFinal() + "");
             jtPesoAnt.setText(dieta.getPesoActual() + "");
-            jtFechaAnt.setText(dieta.getFechaActual() + "");
+            jtFechaAnt.setText(dieta.getFechaActual().format(nuevoFormato));
 
         } catch (NullPointerException np) {
             dieta2 = dd.buscarDieta(paciente);
             jtPesoInicial.setText(dieta2.getPesoInicial() + "");
-            jtFechaInicial.setText(dieta2.getFechaInicial() + "");
+            jtFechaInicial.setText(dieta2.getFechaInicial().format(nuevoFormato));
             jtPesoObjetivo.setText(dieta2.getPesoFinal() + "");
             JOptionPane.showMessageDialog(null, "Es el primer control del paciente seleccionado");
 
@@ -385,10 +387,11 @@ public class FormularioHistorial extends javax.swing.JInternalFrame {
         borrarTabla();
         HistorialData hd = new HistorialData();
         listaH = hd.buscarHistorial((Paciente) jcbPaciente.getSelectedItem());
+        DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
 
             for (Historial it : listaH) {
-                Object[] fila = new Object[]{it.getPeso(), it.getFechaRegistro()};
+                Object[] fila = new Object[]{it.getPeso(), it.getFechaRegistro().format(nuevoFormato)};
                 modelo.addRow(fila);
 
             }
