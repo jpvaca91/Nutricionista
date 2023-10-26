@@ -225,6 +225,7 @@ DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DietaData dd = new DietaData();
         listaD = dd.listarTodasLasDietas();
         DateTimeFormatter nuevoFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       
         for (Dieta obj : listaD) {
             if (obj.getFechaFinal().isBefore(obj.getFechaActual())) {
                 //comparar pesos

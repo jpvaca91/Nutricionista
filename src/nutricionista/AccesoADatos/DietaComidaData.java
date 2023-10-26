@@ -36,10 +36,10 @@ public class DietaComidaData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
-            if (rs.next()) {
+           /* if (rs.next()) {
 
                 JOptionPane.showMessageDialog(null, "Comida asignada correctamente al paciente");
-            }
+            }*/
             ps.close();
 
         } catch (SQLException ex) {
