@@ -1,9 +1,13 @@
 package nutricionista.Vistas;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import nutricionista.AccesoADatos.DietaData;
 import nutricionista.AccesoADatos.PacienteData;
@@ -11,9 +15,13 @@ import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.Paciente;
 
 public class FormularioPaciente extends javax.swing.JInternalFrame {
+    
+    Calendar fechaActual=new GregorianCalendar();
 
     public FormularioPaciente() {
         initComponents();
+        
+        jdFechaInicial.setCalendar(fechaActual);
     }
 
     /**
@@ -131,6 +139,8 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
                 jtPesoObjActionPerformed(evt);
             }
         });
+
+        jdFechaInicial.setEnabled(false);
 
         jtPesoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,7 +291,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             Dieta dieta = new Dieta();
 
             dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
-            dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+          //  dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
             dieta.setFechaFinal(jdFechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
