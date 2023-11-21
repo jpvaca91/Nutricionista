@@ -15,13 +15,18 @@ import nutricionista.Entidades.Dieta;
 import nutricionista.Entidades.Paciente;
 
 public class FormularioPaciente extends javax.swing.JInternalFrame {
-    
-    Calendar fechaActual=new GregorianCalendar();
 
+    //Calendar fechaActual = new GregorianCalendar();
+    // JDateChooser jdFechaFin = new JDateChooser();
     public FormularioPaciente() {
         initComponents();
-        
-        jdFechaInicial.setCalendar(fechaActual);
+
+        jdFechaInicial.getDateEditor().setEnabled(false);
+
+        jdFechaFin.getDateEditor().setEnabled(false);
+
+        jrbEstado.setSelected(true);
+
     }
 
     /**
@@ -72,6 +77,12 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtDNIActionPerformed(evt);
+            }
+        });
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
             }
         });
 
@@ -140,8 +151,6 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        jdFechaInicial.setEnabled(false);
-
         jtPesoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtPesoInicialActionPerformed(evt);
@@ -149,6 +158,8 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         });
 
         jLabel10.setText("Fecha Objetivo");
+
+        jdFechaFin.setDoubleBuffered(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,7 +281,8 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        Boolean estado = false;
+
+        Boolean estado = true;
 
         try {
 
@@ -279,10 +291,9 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             String domicilio = jtDomicilio.getText();
             String celular = jtCelular.getText();
 
-            if (jrbEstado.isSelected()) {
+            /* if (jrbEstado.isSelected()) {
                 estado = true;
-            }
-
+            }*/
             Paciente paci = new Paciente(dni, nombre, domicilio, celular, estado);
             // JOptionPane.showMessageDialog(null, "Paciente creado Localmente");
 
@@ -291,9 +302,16 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             Dieta dieta = new Dieta();
 
             dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
-          //  dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
             dieta.setFechaFinal(jdFechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+          /*  Date FechaInicial = new Date();
+            Date FechaFinal = new Date();
+
+            if (FechaFinal.before(FechaInicial)) {
+                JOptionPane.showMessageDialog(null, "La fecha objetivo debe ser posterior a la fecha inicial.");
+            }*/
 
             pacientedata.guardarPaciente(paci);
             dieta.setPaciente(paci);
@@ -353,7 +371,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un documento válido");
             limpiarCampos();
-        }catch(NullPointerException np){
+        } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(null, "Este paciente no tiene dieta iniciada");
         }
 
@@ -437,6 +455,19 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
     private void jtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCelularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtCelularActionPerformed
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

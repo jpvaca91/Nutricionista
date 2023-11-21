@@ -161,6 +161,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         fp.setVisible(true);
         Escritorio.add(fp);
         Escritorio.moveToFront(fp);
+        
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jmDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDietaActionPerformed
