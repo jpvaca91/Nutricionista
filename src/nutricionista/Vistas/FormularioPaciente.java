@@ -300,25 +300,28 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
             PacienteData pacientedata = new PacienteData();
 
             Dieta dieta = new Dieta();
+            
+            
 
             dieta.setPesoInicial(Double.parseDouble(jtPesoInicial.getText()));
             dieta.setFechaInicial(jdFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             dieta.setPesoFinal(Double.parseDouble(jtPesoObj.getText()));
             dieta.setFechaFinal(jdFechaFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
-          /*  Date FechaInicial = new Date();
+            
+            
+                /*  Date FechaInicial = new Date();
             Date FechaFinal = new Date();
 
-            if (FechaFinal.before(FechaInicial)) {
+            if (FechaFinal.after(FechaInicial)) {
                 JOptionPane.showMessageDialog(null, "La fecha objetivo debe ser posterior a la fecha inicial.");
             }*/
-
-            pacientedata.guardarPaciente(paci);
-            dieta.setPaciente(paci);
-            DietaData dd = new DietaData();
-            dd.guardarDieta(dieta);
-            limpiarCampos();
-        } catch (NumberFormatException nf) {
+                pacientedata.guardarPaciente(paci);
+                dieta.setPaciente(paci);
+                DietaData dd = new DietaData();
+                dd.guardarDieta(dieta);
+                limpiarCampos();
+            }catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Error en los campos numéricos");
         }
 
@@ -463,8 +466,10 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         boolean mayusculas = key >= 65 && key <= 90;
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
+        boolean enieMayusc = key == 165;
+        boolean enieMinusc = key == 164;
 
-        if (!(minusculas || mayusculas || espacio)) {
+        if (!(minusculas || mayusculas || espacio || enieMayusc || enieMinusc)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtNombreKeyTyped
@@ -506,7 +511,7 @@ public class FormularioPaciente extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtDomicilio.setText("");
         jtCelular.setText("");
-        jrbEstado.setSelected(false);
+        jrbEstado.setSelected(true);
         jtPesoObj.setText("");
         jtPesoInicial.setText("");
         jdFechaInicial.setDate(null);
